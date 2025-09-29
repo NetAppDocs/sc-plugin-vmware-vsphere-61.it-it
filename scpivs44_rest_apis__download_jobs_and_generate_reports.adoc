@@ -1,0 +1,57 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_rest_apis__download_jobs_and_generate_reports.html 
+keywords:  
+summary: Per generare report e scaricare log per i processi client VMware vSphere utilizzando il SnapCenter Plug-in for VMware vSphere , è necessario utilizzare le chiamate API REST per VMware vSphere. 
+---
+= API REST per scaricare lavori e generare report
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Per generare report e scaricare log per i processi client VMware vSphere utilizzando il SnapCenter Plug-in for VMware vSphere , è necessario utilizzare le chiamate API REST per VMware vSphere.
+
+Per ogni API REST, aggiungi `\https://<server>:<port>` nella parte anteriore dell'API REST per formare un endpoint completo.
+
+
+
+== Utilizzare le seguenti API REST nella sezione Lavori per ottenere informazioni dettagliate sui lavori:
+
+|===
+| API REST | Commenti 
+
+
+| `/4.1/jobs` | `Get all jobs`ottiene i dettagli del lavoro per più lavori.  È possibile restringere l'ambito della richiesta specificando un tipo di lavoro, ad esempio `backup` , `mountBackup` , O `restore` . 
+
+
+| `/4.1/jobs/{id}` | `Get job details`ottiene informazioni dettagliate sul lavoro specificato. 
+|===
+
+
+== Utilizzare la seguente API REST nella sezione Job per scaricare i registri dei job:
+
+|===
+| API REST | Commenti 
+
+
+| `/4.1/jobs/{id}/logs` | `getJobLogsById`scarica i registri per il lavoro specificato. 
+|===
+
+
+== Per generare report, utilizzare le seguenti API REST nella sezione Report:
+
+|===
+| API REST | Commenti 
+
+
+| `4.1/reports/protectedVM` | `Get Protected VM List`ottiene un elenco delle VM protette negli ultimi sette giorni. 
+
+
+| `/4.1/reports/
+unProtectedVM` | `Get Unprotected VM List`ottiene un elenco delle VM non protette degli ultimi sette giorni. 
+|===

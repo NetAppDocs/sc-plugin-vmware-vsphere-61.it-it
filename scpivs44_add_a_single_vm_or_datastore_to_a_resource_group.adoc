@@ -1,0 +1,35 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_add_a_single_vm_or_datastore_to_a_resource_group.html 
+keywords:  
+summary: È possibile aggiungere rapidamente una singola VM o un singolo datastore a qualsiasi gruppo di risorse esistente gestito dal SnapCenter Plug-in for VMware vSphere. 
+---
+= Aggiungere una singola VM o un datastore a un gruppo di risorse
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+È possibile aggiungere rapidamente una singola VM o un singolo datastore a qualsiasi gruppo di risorse esistente gestito dal SnapCenter Plug-in for VMware vSphere.
+
+.Informazioni su questo compito
+È possibile aggiungere datastore SAN e NAS, ma non datastore VSAN o VVOL.
+
+.Passi
+. Nell'interfaccia utente grafica del client vSphere, seleziona *Menu* nella barra degli strumenti e vai alla VM o al datastore che desideri aggiungere.
+. Nel riquadro di navigazione a sinistra, fare clic con il pulsante destro del mouse sulla VM o sul datastore e selezionare * SnapCenter Plug-in for VMware vSphere* > *Aggiungi al gruppo di risorse* dall'elenco a discesa secondario.
++
+Il sistema verifica innanzitutto che SnapCenter gestisca e sia compatibile con il sistema di archiviazione su cui si trova la VM selezionata, quindi visualizza la pagina *Aggiungi al gruppo di risorse*.  Se il messaggio `SnapCenter Compatibility Error` viene visualizzato, la VM selezionata non è compatibile con SnapCenter ed è necessario prima aggiungere la VM di archiviazione appropriata a SnapCenter.
+
+. Nella pagina *Aggiungi al gruppo di risorse*, seleziona un gruppo di risorse, quindi seleziona *OK*.
++
+Quando si seleziona *OK*, il sistema verifica innanzitutto che SnapCenter gestisca e sia compatibile con l'archiviazione su cui si trovano le VM o i datastore selezionati.
+
++
+Se il messaggio `Selected <resource-name> is not SnapCenter compatible` viene visualizzato, significa che una VM o un datastore selezionato non è compatibile con SnapCenter. Fare riferimento a link:scpivs44_create_resource_groups_for_vms_and_datastores.html#manage-compatibility-check-failures["Gestire i fallimenti del controllo di compatibilità"] per maggiori informazioni.
+
+

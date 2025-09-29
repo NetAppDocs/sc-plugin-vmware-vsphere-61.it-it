@@ -1,0 +1,95 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_upgrade.html 
+keywords:  
+summary: 'Se si utilizza il SnapCenter Plug-in for VMware vSphere , è possibile eseguire l"aggiornamento a una versione più recente.' 
+---
+= Aggiornamento da una versione precedente del SnapCenter Plug-in for VMware vSphere
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+
+NOTE: L'aggiornamento a SCV 6.1 è supportato solo su VMware vCenter Server 7 Update 1 e versioni successive; per VMware vCenter Server precedenti alla versione 7 Update 1, è necessario continuare a utilizzare SCV 4.7. L'aggiornamento è dirompente sulle versioni non supportate del server VMware vCenter.
+
+Se si utilizza il SnapCenter Plug-in for VMware vSphere , è possibile eseguire l'aggiornamento a una versione più recente.  Il processo di aggiornamento annulla la registrazione del plug-in esistente e ne distribuisce uno compatibile solo con vSphere 7.0U1 e versioni successive.
+
+
+
+== Percorsi di aggiornamento
+
+|===
+
+
+| Se utilizzi la versione SnapCenter Plug-in for VMware vSphere (SCV)... | È possibile aggiornare direttamente il SnapCenter Plug-in for VMware vSphere a... 
+
+
+| SCV 6.0 | Aggiorna a SCV 6.1 
+
+
+| SCV 5.0 | Aggiorna a SCV 6.0 e SCV 6.1 
+
+
+| SCV 4.9 | Aggiorna a SCV 5.0 e SCV 6.0 
+
+
+| SCV 4.8 | Aggiorna a SCV 4.9 e SCV 5.0 
+
+
+| SCV 4.7 | Aggiorna a SCV 4.8 e SCV 4.9 
+
+
+| SCV 4.6 | Aggiorna a SCV 4.7 e SCV 4.8 
+|===
+
+TIP: Eseguire il backup del SnapCenter Plug-in for VMware vSphere OVA prima di avviare un aggiornamento.
+
+
+NOTE: Il passaggio della configurazione di rete da statica a DHCP non è supportato.
+
+Per le informazioni più recenti sulle versioni supportate, fare riferimento a https://imt.netapp.com/matrix/imt.jsp?components=134348;&solution=1517&isHWU&src=IMT["Strumento matrice di interoperabilità NetApp"^] (IMT).
+
+.Passi
+. Prepararsi all'aggiornamento disabilitando il SnapCenter Plug-in for VMware vSphere.
++
+.. Accedi all'interfaccia utente grafica di gestione SnapCenter Plug-in for VMware vSphere . L'indirizzo IP viene visualizzato quando si distribuisce il SnapCenter Plug-in for VMware vSphere.
+.. Selezionare *Configurazione* nel riquadro di navigazione a sinistra, quindi selezionare l'opzione *Servizio* nella sezione Dettagli plug-in per disabilitare il plug-in.
+
+
+. Scarica l'aggiornamento `.iso` file.
++
+.. Accedi al sito di supporto NetApp(https://mysupport.netapp.com/products/index.html[] ).
+.. Dall'elenco dei prodotti, seleziona * SnapCenter Plug-in for VMware vSphere*, quindi seleziona il pulsante *SCARICA L'ULTIMA VERSIONE*.
+.. Scarica il SnapCenter Plug-in for VMware vSphere `.iso` file in qualsiasi posizione.
+
+
+. Installa l'aggiornamento.
++
+.. Nel browser, vai a VMware vSphere vCenter.
+.. Nella GUI di vCenter, selezionare *vSphere Client (HTML)*.
+.. Accedi alla pagina *VMware vCenter Single Sign-On*.
+.. Nel riquadro di navigazione, seleziona la VM che desideri aggiornare, quindi seleziona la scheda *Riepilogo*.
+.. Nel riquadro *Oggetti correlati*, seleziona un qualsiasi archivio dati nell'elenco, quindi seleziona la scheda *Riepilogo*.
+.. Nella scheda *File* per il datastore selezionato, seleziona una cartella qualsiasi nell'elenco, quindi seleziona *Carica file*.
+.. Nella schermata pop-up di caricamento, vai alla posizione in cui hai scaricato il `.iso` file, quindi seleziona su `.iso` immagine del file, quindi seleziona *Apri*.  Il file viene caricato nel datastore.
+.. Torna alla VM che vuoi aggiornare e seleziona la scheda *Riepilogo*.  Nel riquadro *Hardware VM*, nel campo CD/DVD, il valore dovrebbe essere "Disconnesso".
+.. Selezionare l'icona di connessione nel campo CD/DVD e selezionare *Connetti all'immagine CD/DVD su un datastore*.
++
+image:scpivs44_image42.png["Interfaccia utente di vCenter"]
+
+.. Nella procedura guidata, procedere come segue:
++
+... Nella colonna Datastore, seleziona il datastore in cui hai caricato il `.iso` file.
+... Nella colonna Contenuto, vai a `.iso` file caricato, assicurati che nel campo Tipo di file sia selezionato "Immagine ISO", quindi seleziona *OK*.  Attendi finché il campo non mostra lo stato "Connesso".
+
+
+.. Accedere alla console di manutenzione selezionando la scheda *Riepilogo* dell'appliance virtuale, quindi selezionare la freccia verde di esecuzione per avviare la console di manutenzione.
+.. Immettere *2* per la configurazione del sistema, quindi immettere *8* per l'aggiornamento.
+.. Inserisci *y* per continuare e avviare l'aggiornamento.
+
+
+

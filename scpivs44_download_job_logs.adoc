@@ -1,0 +1,39 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_download_job_logs.html 
+keywords:  
+summary: È possibile scaricare i registri dei lavori dalla scheda Job Monitor nella Dashboard del client VMware vSphere SnapCenter . 
+---
+= Scarica i registri dei lavori
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+È possibile scaricare i registri dei lavori dalla scheda Job Monitor nella Dashboard del client VMware vSphere SnapCenter .
+
+Se si verifica un comportamento imprevisto durante l'utilizzo del client VMware vSphere, è possibile utilizzare i file di registro per identificare la causa e risolvere il problema.
+
+
+NOTE: Il valore predefinito per la conservazione dei registri dei lavori è 30 giorni; il valore predefinito per la conservazione dei lavori è 90 giorni.  I registri dei lavori e i lavori più vecchi della conservazione configurata vengono eliminati ogni sei ore.  Puoi usare la Configurazione `jobs/cleanup` API REST per modificare la durata di conservazione dei processi e dei registri dei processi.  Non è possibile modificare la pianificazione della pulizia.
+
+.Passi
+. Dalla pagina di scelta rapida del client vCenter, selezionare SnapCenter Plug-in for VMware vSphere (SCV).
+. Nel riquadro di navigazione sinistro di SCV, seleziona *Dashboard* > *Job Monitor*.
+. Selezionare l'icona di download nella barra del titolo di Job Monitor.
++
+Potrebbe essere necessario scorrere verso destra per vedere l'icona.
+
++
+È anche possibile fare doppio clic su un lavoro per accedere alla finestra Dettagli lavoro e quindi selezionare *Scarica registri lavori*.
+
+
+
+.Risultato
+I registri dei lavori si trovano sull'host della VM Linux in cui è distribuito il SnapCenter Plug-in for VMware vSphere .  La posizione predefinita del registro dei lavori è `/var/log/netapp` .
+
+Se hai provato a scaricare i registri dei lavori ma il file di registro indicato nel messaggio di errore è stato eliminato, potresti riscontrare il seguente errore: `HTTP ERROR 500 Problem accessing /export-scv-logs` .  Per correggere questo errore, controllare lo stato di accesso al file e le autorizzazioni per il file indicato nel messaggio di errore e correggere il problema di accesso.

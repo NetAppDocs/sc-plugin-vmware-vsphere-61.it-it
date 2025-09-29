@@ -1,0 +1,19 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_get_started_overview.html 
+keywords:  
+summary: Per utilizzare le funzionalità SnapCenter per proteggere VM, datastore e database coerenti con le applicazioni su macchine virtualizzate, è necessario distribuire il SnapCenter Plug-in for VMware vSphere. 
+---
+= Panoramica della distribuzione
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Per utilizzare le funzionalità SnapCenter per proteggere VM, datastore e database coerenti con le applicazioni su macchine virtualizzate, è necessario distribuire il SnapCenter Plug-in for VMware vSphere.
+
+Gli utenti SnapCenter esistenti devono utilizzare un flusso di lavoro di distribuzione diverso da quello dei nuovi utenti SnapCenter .

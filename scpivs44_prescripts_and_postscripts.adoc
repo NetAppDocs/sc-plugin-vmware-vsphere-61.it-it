@@ -1,0 +1,169 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_prescripts_and_postscripts.html 
+keywords:  
+summary: 'È possibile utilizzare prescrizioni e post-scrizioni personalizzate come parte delle operazioni di protezione dei dati.  Questi script consentono l"automazione prima o dopo il processo di protezione dei dati.' 
+---
+= Prescrizioni e poscrizioni
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+È possibile utilizzare prescrizioni e post-scrizioni personalizzate come parte delle operazioni di protezione dei dati.  Questi script consentono l'automazione prima o dopo il processo di protezione dei dati.  Ad esempio, potresti includere uno script che ti avvisa automaticamente di errori o avvisi relativi ai processi di protezione dei dati.  Prima di impostare i tuoi prescript e postscript, dovresti comprendere alcuni dei requisiti per la creazione di questi script.
+
+
+
+== Tipi di script supportati
+
+Sono supportati gli script Perl e shell.  Gli script shell devono iniziare con `!/bin/bash` . (`!/bin/sh` non è supportato.)
+
+
+
+== Posizione del percorso dello script
+
+I prescript e i postscript vengono eseguiti dal SnapCenter Plug-in for VMware vSphere.  Pertanto, gli script devono trovarsi nel SnapCenter Plug-in for VMware vSphere OVA, con autorizzazioni di esecuzione.
+
+Ad esempio: * Un percorso di script PERL potrebbe essere `/support/support/script.pl` * Un percorso di script shell potrebbe essere `/support/support/script.sh`
+
+Il percorso dello script viene convalidato al momento dell'esecuzione dello script.
+
+
+
+== Dove specificare gli script
+
+Gli script sono specificati nei criteri di backup. Quando viene avviato un processo di backup, il criterio associa automaticamente lo script alle risorse sottoposte a backup.
+
+Per specificare più script, premere *Invio* dopo ogni percorso di script per elencare ogni script su una riga separata.  I punti e virgola (;) non sono consentiti.  È possibile specificare più prescrizioni e più post-scrizioni.  Un singolo script può essere codificato sia come prescript che come postscript e può richiamare altri script.
+
+
+
+== Quando vengono eseguiti gli script
+
+Gli script vengono eseguiti in base al valore impostato per BACKUP_PHASE.
+
+* FASE_BACKUP=PRE_BACKUP
++
+I prescript vengono eseguiti nella fase PRE_BACKUP dell'operazione.
+
+
+
+
+NOTE: Se una prescrizione non riesce, il backup viene completato correttamente e viene inviato un messaggio di avviso.
+
+* BACKUP_PHASE=POST_BACKUP o BACKUP_PHASE=FAILED_BACKUP
++
+I postscript vengono eseguiti nella fase POST_BACKUP dell'operazione dopo il completamento corretto del backup oppure nella fase FAILED_BACKUP se il backup non viene completato correttamente.
+
+
+
+
+NOTE: Se un postscript fallisce, il backup viene completato correttamente e viene inviato un messaggio di avviso.
+
+Controllare quanto segue per verificare che i valori dello script siano popolati: * Per gli script PERL: `/support/support/log_env.log` * Per gli script shell: `/support/support/log_file.log`
+
+
+
+== Variabili di ambiente passate agli script
+
+È possibile utilizzare negli script le variabili di ambiente mostrate nella tabella seguente.
+
+|===
+| Variabile d'ambiente | Descrizione 
+
+
+| `BACKUP_NAME` | Nome del backup.  Variabile passata solo nei postscript. 
+
+
+| `BACKUP_DATE` | Data del backup, nel formato `yyyymmdd` Variabile passata solo nei postscript. 
+
+
+| `BACKUP_TIME` | Ora del backup, nel formato `hhmmss` Variabile passata solo nei postscript. 
+
+
+| `BACKUP_PHASE` | Fase del backup in cui si desidera eseguire lo script.  I valori validi sono: `PRE_BACKUP, POST_BACKUP, and FAILED_BACKUP` .  Variabile passata in prescript e postscript. 
+
+
+| `STORAGE_SNAPSHOTS` | Numero di snapshot di archiviazione nel backup.  Variabile passata solo nei postscript. 
+
+
+| `STORAGE_SNAPSHOT.#` | Uno degli snapshot di archiviazione definiti, nel seguente formato:
+`<filer>:/vol/<volume>:<ONTAP-snapshot-name>` Variabile passata solo nei postscript. 
+
+
+| `VIRTUAL_MACHINES` | Numero di VM nel backup.  Variabile passata in prescript e postscript. 
+
+
+| `VIRTUAL_MACHINE.#` | Una delle macchine virtuali definite, nel seguente formato:
+`<VM name>[vertical bar]<VM UUID>[vertical bar]<power-state>[vertical bar]<VM snapshot>[vertical bar]<ip-addresses>
+<power-state> has the values POWERED_ON, POWERED_OFF, or
+SUSPENDED`
+`<VM snapshot>` ha i valori `true` O `false` Variabile passata in prescript e postscript. 
+|===
+
+
+== Timeout degli script
+
+Il timeout per gli script di backup è di 15 minuti e non può essere modificato.
+
+
+
+== Esempio di script PERL n. 1
+
+Il seguente script PERL di esempio stampa le variabili ambientali quando viene eseguito un backup.
+
+`#!/usr/bin/perl`
+`use warnings;`
+`use strict;`
+`my $argnum;`
+`my $logfile = '/support/support/log_env.log';`
+`open (FH, '>>', $logfile) or die $!;`
+`foreach (sort keys %ENV) {`
+`print FH "$_ = $ENV{$_}\n";`
+`}`
+`print FH "=========\n";`
+`close (FH);`
+
+
+
+== Esempio di script PERL n. 2
+
+L'esempio seguente stampa informazioni sul backup.
+
+`#!/usr/bin/perl`
+`use warnings;`
+`use strict;`
+
+`my $argnum;`
+`my $logfile = '/support/support/log_env.log';`
+`open (FH, '>>', $logfile) or die $!;`
+
+`print FH "BACKUP_PHASE is $ENV{'BACKUP_PHASE'}\n";`
+`print FH "Backup name  $ENV{'BACKUP_NAME'}\n";`
+`print FH "Virtual Machine  $ENV{'VIRTUAL_MACHINES'}\n";`
+`print FH "VIRTUAL_MACHINE # is $ENV{'VIRTUAL_MACHINE.1'}\n";`
+`print FH "BACKUP_DATE is $ENV{'BACKUP_DATE'}\n";`
+`print FH "BACKUP_TIME is $ENV{'BACKUP_TIME'}\n";`
+`print FH "STORAGE_SNAPSHOTS is $ENV{'STORAGE_SNAPSHOTS'}\n";`
+`print FH "STORAGE_SNAPSHOT # is $ENV{'STORAGE_SNAPSHOT.1'}\n";`
+
+`print FH "PWD is $ENV{'PWD'}\n";`
+`print FH "INVOCATION_ID is $ENV{'INVOCATION_ID'}\n";`
+
+`print FH "=========\n";`
+`close (FH);`
+
+
+
+== Esempio di script shell
+
+
+`===============================================`
+`#!/bin/bash`
+`echo Stage $BACKUP_NAME >> /support/support/log_file.log`
+`env >> /support/support/log_file.log`
+`===============================================`

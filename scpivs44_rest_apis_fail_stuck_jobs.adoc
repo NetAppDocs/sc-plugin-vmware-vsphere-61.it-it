@@ -1,0 +1,28 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_rest_apis_fail_stuck_jobs.html 
+keywords:  
+summary: Per trovare gli ID dei processi per i processi client VMware vSphere utilizzando il SnapCenter Plug-in for VMware vSphere , è necessario utilizzare le chiamate API REST per VMware vSphere. 
+---
+= API REST per contrassegnare i processi bloccati come non riusciti
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Per trovare gli ID dei processi per i processi client VMware vSphere utilizzando il SnapCenter Plug-in for VMware vSphere , è necessario utilizzare le chiamate API REST per VMware vSphere.  Queste API REST sono state aggiunte al SnapCenter Plug-in for VMware vSphere 4.4.
+
+Per ogni API REST, aggiungi \https://<server>:<porta>` all'inizio dell'API REST per formare un endpoint completo.
+
+Utilizzare la seguente API REST nella sezione Job per modificare lo stato di esecuzione dei job bloccati in uno stato di errore:
+
+|===
+| API REST | Commenti 
+
+
+| `/4.1/jobs/{id}/failJobs` | Quando si passano gli ID dei lavori bloccati in uno stato di esecuzione, `failJobs` contrassegna quei lavori come falliti. Per identificare i lavori bloccati in esecuzione, utilizzare l'interfaccia utente grafica del monitor dei lavori per visualizzare lo stato di ogni lavoro e l'ID del lavoro. 
+|===

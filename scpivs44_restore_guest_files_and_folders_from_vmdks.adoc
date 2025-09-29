@@ -1,0 +1,173 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_restore_guest_files_and_folders_from_vmdks.html 
+keywords:  
+summary: È possibile ripristinare uno o più file o cartelle da un VMDK su un sistema operativo guest Windows. 
+---
+= Ripristinare file e cartelle guest da VMDK
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+È possibile ripristinare uno o più file o cartelle da un VMDK su un sistema operativo guest Windows.
+
+.Informazioni su questo compito
+Per impostazione predefinita, il disco virtuale collegato è disponibile per 24 ore, dopodiché viene automaticamente scollegato.  Nella procedura guidata è possibile scegliere di eliminare automaticamente la sessione al termine dell'operazione di ripristino, oppure è possibile eliminare manualmente la sessione di ripristino file guest in qualsiasi momento, oppure è possibile estendere il tempo nella pagina *Configurazione guest*.
+
+Le prestazioni del ripristino di file o cartelle guest dipendono da due fattori: la dimensione dei file o delle cartelle da ripristinare e il numero di file o cartelle da ripristinare.  Il ripristino di un gran numero di file di piccole dimensioni potrebbe richiedere più tempo del previsto rispetto al ripristino di un piccolo numero di file di grandi dimensioni, se il set di dati da ripristinare ha le stesse dimensioni.
+
+
+IMPORTANT: Su una VM è possibile eseguire solo un'operazione di collegamento o ripristino alla volta.  Non è possibile eseguire operazioni di collegamento o ripristino parallele sulla stessa VM.
+
+
+IMPORTANT: La funzione di ripristino guest consente di visualizzare e ripristinare i file di sistema e nascosti e di visualizzare i file crittografati.  Non tentare di sovrascrivere un file di sistema esistente o di ripristinare file crittografati in una cartella crittografata.  Durante l'operazione di ripristino, gli attributi nascosti, di sistema e crittografati dei file guest non vengono mantenuti nel file ripristinato.  La visualizzazione o l'esplorazione delle partizioni riservate potrebbe causare un errore.
+
+.Passi
+. Dalla finestra dei collegamenti del client vSphere, seleziona *Host e cluster* e seleziona una VM.
+. Fare clic con il pulsante destro del mouse sulla VM e selezionare * SnapCenter Plug-in for VMware vSphere* > *Ripristino file guest*.
+. Nella pagina *Ambito di ripristino*, specificare il backup che contiene il disco virtuale che si desidera collegare procedendo come segue:
++
+.. Nella tabella *Nome backup*, seleziona il backup che contiene il disco virtuale che desideri collegare.
+.. Nella tabella *VMDK*, seleziona il disco virtuale che contiene i file o le cartelle che desideri ripristinare.
+.. Nella tabella *Posizioni*, seleziona la posizione, primaria o secondaria, del disco virtuale che desideri collegare.
+
+
+. Nella pagina *Dettagli ospite*, procedi come segue.
++
+.. Scegli dove collegare il disco virtuale:
++
+|===
+| Seleziona questa opzione… | Se… 
+
+
+| Utilizzare la macchina virtuale ospite  a| 
+Si desidera collegare il disco virtuale alla macchina virtuale su cui si è fatto clic con il pulsante destro del mouse prima di avviare la procedura guidata, quindi selezionare le credenziali per la macchina virtuale su cui si è fatto clic con il pulsante destro del mouse.
+
+
+NOTE: Le credenziali devono essere già state create per la VM.
+
+
+
+| Utilizzare la macchina virtuale proxy di ripristino file guest  a| 
+Si desidera collegare il disco virtuale a una VM proxy, quindi selezionare la VM proxy.
+
+
+NOTE: La VM proxy deve essere configurata prima che inizi l'operazione di collegamento e ripristino.
+
+|===
+.. Seleziona l'opzione *Invia notifica via email*.
++
+Questa opzione è obbligatoria se si desidera ricevere una notifica al termine dell'operazione di collegamento e quando il disco virtuale è disponibile.  L'e-mail di notifica include il nome del disco virtuale, il nome della VM e la lettera di unità appena assegnata per il VMDK.
+
++
+
+TIP: Abilita questa opzione perché il ripristino di un file guest è un'operazione asincrona e potrebbe esserci una latenza temporale per stabilire una sessione guest.
+
++
+Questa opzione utilizza le impostazioni e-mail configurate durante la configurazione del client VMware vSphere in vCenter.
+
+
+
+. Rivedi il riepilogo e seleziona *Fine*.
++
+Prima di selezionare *Fine*, puoi tornare a qualsiasi pagina della procedura guidata e modificare le informazioni.
+
+. Attendi il completamento dell'operazione di collegamento.
++
+È possibile visualizzare l'avanzamento dell'operazione nel monitor dei lavori della Dashboard oppure attendere la notifica via e-mail.
+
+. Per trovare i file che si desidera ripristinare dal disco virtuale collegato, selezionare * SnapCenter Plug-in for VMware vSphere* dalla finestra dei collegamenti del client vSphere.
+. Nel riquadro di navigazione a sinistra selezionare *Ripristino file guest* > *Configurazione guest*.
++
+Nella tabella Guest Session Monitor, è possibile visualizzare informazioni aggiuntive su una sessione selezionando *...  *nella colonna di destra.
+
+. Selezionare la sessione di ripristino dei file guest per il disco virtuale elencata nell'e-mail di notifica.
++
+A tutte le partizioni viene assegnata una lettera di unità, comprese le partizioni riservate al sistema.  Se un VMDK ha più partizioni, è possibile selezionare un'unità specifica selezionandola nell'elenco a discesa nel campo unità nella parte superiore della pagina Esplora file guest.
+
+. Selezionare l'icona *Sfoglia file* per visualizzare un elenco di file e cartelle sul disco virtuale.
++
+Quando si seleziona due volte una cartella per sfogliare e selezionare singoli file, potrebbe verificarsi una latenza durante il recupero dell'elenco dei file, perché l'operazione di recupero viene eseguita in fase di esecuzione.
+
++
+Per una navigazione più semplice, puoi utilizzare i filtri nella stringa di ricerca.  I filtri sono sensibili alle maiuscole e alle minuscole, le espressioni Perl sono prive di spazi.  La stringa di ricerca predefinita è `.` *.  La tabella seguente mostra alcuni esempi di espressioni di ricerca Perl.
+
++
+|===
+| Questa espressione… | Ricerche per… 
+
+
+| . | Qualsiasi carattere, eccetto il carattere di nuova riga. 
+
+
+| .* | Qualsiasi stringa.  Questa è l'impostazione predefinita. 
+
+
+| UN | Il personaggio a. 
+
+
+| da | La stringa ab. 
+
+
+| a [barra verticale] b | Il carattere a o b. 
+
+
+| UN* | Zero o più istanze del carattere a. 
+
+
+| un+ | Una o più istanze del carattere a. 
+
+
+| UN? | Zero o una sola istanza del carattere a. 
+
+
+| ascia} | Esattamente x numero di istanze del carattere a. 
+
+
+| ascia,} | Almeno x numero di istanze del carattere a. 
+
+
+| un{x,y} | Almeno x numero di istanze del carattere a e al massimo y numero. 
+
+
+| \ | Sfugge un carattere speciale. 
+|===
++
+La pagina Esplora file ospite visualizza tutti i file e le cartelle nascosti, oltre a tutti gli altri file e cartelle.
+
+. Seleziona uno o più file o cartelle che desideri ripristinare, quindi seleziona *Seleziona posizione di ripristino*.
++
+I file e le cartelle da ripristinare sono elencati nella tabella File selezionati.
+
+. Nella pagina *Seleziona posizione di ripristino*, specificare quanto segue:
++
+|===
+| Opzione | Descrizione 
+
+
+| Ripristina il percorso | Immettere il percorso di condivisione UNC per l'ospite in cui verranno ripristinati i file selezionati.  Esempio di indirizzo IPv4: `\\10.60.136.65\c$` Esempio di indirizzo IPv6: `\\fd20-8b1e-b255-832e--61.ipv6-literal.net\C\restore` 
+
+
+| Se esistono i file originali  a| 
+Selezionare l'azione da intraprendere se il file o la cartella da ripristinare esiste già nella destinazione di ripristino: Sovrascrivi sempre o Ignora sempre.
+
+
+NOTE: Se la cartella esiste già, il suo contenuto verrà unito a quello della cartella esistente.
+
+
+
+| Disconnetti la sessione ospite dopo un ripristino riuscito | Selezionare questa opzione se si desidera che la sessione di ripristino del file guest venga eliminata al termine dell'operazione di ripristino. 
+|===
+. Selezionare *Ripristina*.
++
+È possibile visualizzare l'avanzamento dell'operazione di ripristino nel monitor dei lavori della Dashboard oppure attendere la notifica via e-mail.  Il tempo necessario per l'invio della notifica via e-mail dipende dal tempo impiegato per completare l'operazione di ripristino.
+
++
+L'e-mail di notifica contiene un allegato con l'output dell'operazione di ripristino.  Se l'operazione di ripristino non riesce, aprire l'allegato per ulteriori informazioni.
+
+

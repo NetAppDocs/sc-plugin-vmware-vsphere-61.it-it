@@ -1,0 +1,81 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_attach_vmdks_to_a_vm.html 
+keywords:  
+summary: È possibile collegare uno o più VMDK da un backup alla VM padre, a una VM alternativa sullo stesso host ESXi o a una VM alternativa su un host ESXi alternativo gestito dallo stesso vCenter o da un vCenter diverso in modalità collegata.  Sono supportate le VM nei datastore tradizionali e nei datastore vVol. 
+---
+= Collegare i VMDK a una VM o a una VM vVol
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+È possibile collegare uno o più VMDK da un backup alla VM padre, a una VM alternativa sullo stesso host ESXi o a una VM alternativa su un host ESXi alternativo gestito dallo stesso vCenter o da un vCenter diverso in modalità collegata.  Sono supportate le VM nei datastore tradizionali e nei datastore vVol.
+
+In questo modo è più semplice ripristinare uno o più file singoli da un'unità anziché ripristinare l'intera unità.  È possibile scollegare il VMDK dopo aver ripristinato o aver avuto accesso ai file necessari.
+
+.Informazioni su questo compito
+Sono disponibili le seguenti opzioni di collegamento:
+
+* È possibile collegare dischi virtuali da un backup primario o secondario.
+* È possibile collegare i dischi virtuali alla VM padre (la stessa VM a cui il disco virtuale era originariamente associato) oppure a una VM alternativa sullo stesso host ESXi.
+
+
+Per il collegamento di dischi virtuali si applicano le seguenti limitazioni:
+
+* Le operazioni di collegamento e scollegamento non sono supportate per i modelli di macchine virtuali.
+* Quando più di 15 VMDK sono collegati a un controller iSCSI, la macchina virtuale per il SnapCenter Plug-in for VMware vSphere non riesce a individuare numeri di unità VMDK superiori a 15 a causa delle restrizioni VMware.
++
+In questo caso, aggiungere manualmente i controller SCSi e riprovare l'operazione di collegamento.
+
+* Non è possibile collegare manualmente un disco virtuale che è stato collegato o montato come parte di un'operazione di ripristino di file guest.
+* Le operazioni di collegamento e ripristino collegano i VMDK utilizzando il controller SCSi predefinito.  Tuttavia, quando si esegue il backup dei VMDK collegati a una VM con un disco NVMe, le operazioni di collegamento e ripristino utilizzano il controller NVMe, se disponibile.
+
+
+.Prima di iniziare
+Per aggiungere il controller NVMe al disco, seguire i passaggi indicati di seguito.
+
+. Accedi al client vCenter
+. Selezionare la VM dal datastore VMFS
+. Fare clic con il tasto destro del mouse sulla VM e andare su *Modifica impostazioni*
+. Nella finestra di modifica delle impostazioni, seleziona *Aggiungi nuovo dispositivo* > *Controller NVMe*
+
+
+.Passi
+. Nell'interfaccia utente grafica del client VMware vSphere, selezionare *Menu* nella barra degli strumenti, quindi selezionare *Host e cluster* dall'elenco a discesa.
+. Nel riquadro di navigazione a sinistra, fare clic con il pulsante destro del mouse su una VM, quindi selezionare * SnapCenter Plug-in for VMware vSphere* > *Collega disco/i virtuale/i*.
+. Nella finestra *Collega disco virtuale*, nella sezione *Backup*, seleziona un backup.
++
+È possibile filtrare l'elenco dei backup selezionando l'icona del filtro e scegliendo un intervallo di data e ora, selezionando se si desiderano backup contenenti snapshot VMware, se si desiderano backup montati e la posizione. Selezionare *OK*.
+
+. Nella sezione *Seleziona dischi*, seleziona uno o più dischi che vuoi collegare e la posizione da cui vuoi effettuare il collegamento (primario o secondario).
++
+È possibile modificare il filtro per visualizzare le posizioni principali e secondarie.
+
+. Per impostazione predefinita, i dischi virtuali selezionati vengono collegati alla VM padre. Per collegare i dischi virtuali selezionati a una VM alternativa nello stesso host ESXi, selezionare *Fare clic qui per collegare alla VM alternativa* e specificare la VM alternativa.
+. Selezionare *Allega*.
+. Facoltativo: monitorare l'avanzamento dell'operazione nella sezione *Attività recenti*.
++
+Aggiorna lo schermo per visualizzare le informazioni aggiornate.
+
+. Verificare che il disco virtuale sia collegato eseguendo quanto segue:
++
+.. Selezionare *Menu* nella barra degli strumenti, quindi selezionare *VM e modelli* dall'elenco a discesa.
+.. Nel riquadro di navigazione a sinistra, fare clic con il pulsante destro del mouse su una VM, quindi selezionare *Modifica impostazioni* nell'elenco a discesa.
+.. Nella finestra *Modifica impostazioni*, espandere l'elenco di ciascun disco rigido per visualizzare l'elenco dei file del disco.
++
+image:scpivs44_image23.png["Finestra di modifica delle impostazioni"]
+
++
+Nella pagina Modifica impostazioni sono elencati i dischi presenti sulla VM.  È possibile espandere i dettagli di ciascun disco rigido per visualizzare l'elenco dei dischi virtuali collegati.
+
+
+
+
+
+.Risultato
+È possibile accedere ai dischi collegati dal sistema operativo host e quindi recuperare le informazioni necessarie dai dischi.

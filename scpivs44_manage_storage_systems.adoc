@@ -1,0 +1,58 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_manage_storage_systems.html 
+keywords:  
+summary: Prima di poter eseguire il backup o il ripristino di VM o datastore utilizzando il client VMware vSphere, è necessario aggiungere lo storage. 
+---
+= Gestire i sistemi di archiviazione
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Prima di poter eseguire il backup o il ripristino di VM o datastore utilizzando il client VMware vSphere, è necessario aggiungere lo storage.
+
+
+
+== Modificare le VM di archiviazione
+
+È possibile utilizzare il client VMware vSphere per modificare le configurazioni dei cluster e delle VM di storage registrate nel SnapCenter Plug-in for VMware vSphere e utilizzate per le operazioni di protezione dei dati delle VM.
+
+Se si modifica una VM di archiviazione aggiunta automaticamente come parte di un cluster (talvolta denominata VM di archiviazione implicita), tale VM di archiviazione diventa una VM di archiviazione esplicita e può essere eliminata separatamente senza modificare le altre VM di archiviazione in quel cluster.  Nella pagina Sistemi di archiviazione, il nome utente viene visualizzato come N/D quando il metodo di autenticazione avviene tramite certificato; i nomi utente vengono visualizzati solo per le VM di archiviazione esplicite nell'elenco dei cluster e hanno il flag ExplicitSVM impostato su true.  Tutte le VM di archiviazione sono sempre elencate nel cluster associato.
+
+
+IMPORTANT: Se hai aggiunto VM di archiviazione per operazioni di protezione dei dati basate sulle applicazioni tramite l'interfaccia utente grafica SnapCenter , devi utilizzare la stessa interfaccia utente grafica per modificare tali VM di archiviazione.
+
+.Passi
+. Nel riquadro di navigazione sinistro del plug-in SCV, selezionare *Sistemi di archiviazione*.
+. Nella pagina *Sistemi di archiviazione*, seleziona la VM di archiviazione da modificare, quindi seleziona *Modifica*.
+. Nella finestra *Modifica sistema di archiviazione*, immettere i nuovi valori, quindi selezionare *Aggiorna* per applicare le modifiche.
+
+
+
+
+== Rimuovere le VM di archiviazione
+
+È possibile utilizzare il client VMware vSphere per rimuovere le VM di storage dall'inventario in vCenter.
+
+
+NOTE: Se hai aggiunto VM di archiviazione per operazioni di protezione dei dati basate sulle applicazioni tramite l'interfaccia utente grafica SnapCenter , devi utilizzare la stessa interfaccia utente grafica per modificare tali VM di archiviazione.
+
+.Prima di iniziare
+Prima di poter rimuovere la VM di archiviazione, è necessario smontare tutti gli archivi dati nella VM di archiviazione.
+
+.Informazioni su questo compito
+Se un gruppo di risorse ha backup che risiedono su una VM di archiviazione che si rimuove, i backup successivi per quel gruppo di risorse non riusciranno.
+
+.Passi
+. Nel riquadro di navigazione sinistro del plug-in SCV, selezionare *Sistemi di archiviazione*.
+. Nella pagina *Sistemi di archiviazione*, seleziona la VM di archiviazione da rimuovere, quindi seleziona *Elimina*.
+. Nella casella di conferma *Rimuovi sistema di archiviazione*, seleziona la casella *Elimina sistema/i di archiviazione* e quindi seleziona *Sì* per confermare.  *Nota:* sono supportati solo gli host ESXi 7.0U1 e versioni successive.
++
+link:scpivs44_restart_the_vmware_vsphere_web_client_service.html["Riavviare il servizio client VMware vSphere"] .
+
+

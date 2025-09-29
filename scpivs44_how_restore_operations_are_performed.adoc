@@ -1,0 +1,72 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_how_restore_operations_are_performed.html 
+keywords:  
+summary: 'Per gli ambienti VMFS, il SnapCenter Plug-in for VMware vSphere utilizza operazioni di clonazione e montaggio con Storage VMotion per eseguire operazioni di ripristino.  Per gli ambienti NFS, il plug-in utilizza ONTAP Single File SnapRestore (SFSR) nativo per garantire una maggiore efficienza per la maggior parte delle operazioni di ripristino.  Per le VM vVol, il plug-in utilizza ONTAP Single File Snapshot Restore e SnapMirror Restore per le operazioni di ripristino.' 
+---
+= Come vengono eseguite le operazioni di ripristino
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Per gli ambienti VMFS, il SnapCenter Plug-in for VMware vSphere utilizza operazioni di clonazione e montaggio con Storage VMotion per eseguire operazioni di ripristino.  Per gli ambienti NFS, il plug-in utilizza ONTAP Single File SnapRestore (SFSR) nativo per garantire una maggiore efficienza per la maggior parte delle operazioni di ripristino.  Per le VM vVol, il plug-in utilizza ONTAP Single File Snapshot Restore (ONTAP SFSR) e SnapMirror Restore per le operazioni di ripristino.  Nella tabella seguente viene descritto come vengono eseguite le operazioni di ripristino.
+
+|===
+| Operazioni di ripristino | Da | Eseguito utilizzando 
+
+
+| VM e VMDK | Backup primari | Ambienti NFS: ONTAP Single File SnapRestore Ambienti VMFS: clonazione e montaggio con Storage VMotion 
+
+
+| VM e VMDK | Backup secondari | Ambienti NFS: ONTAP Single File SnapRestore Ambienti VMFS: clonazione e montaggio con Storage VMotion 
+
+
+| VM e VMDK eliminati | Backup primari | Ambienti NFS: ONTAP Single File SnapRestore Ambienti VMFS: clonazione e montaggio con Storage VMotion 
+
+
+| VM e VMDK eliminati | Backup secondari | Ambienti NFS: clonazione e montaggio con Storage VMotion Ambienti VMFS: clonazione e montaggio con Storage VMotion 
+
+
+| VM e VMDK | Backup primari coerenti con la VM | Ambienti NFS: ONTAP Single File SnapRestore Ambienti VMFS: clonazione e montaggio con Storage VMotion 
+
+
+| VM e VMDK | Backup secondari coerenti con la VM | Ambienti NFS: ONTAP SnapMirror Restore Ambienti VMFS: clonazione e montaggio con Storage VMotion 
+
+
+| VM vVol | Backup primari coerenti con gli arresti anomali | ONTAP Single File SnapRestore per tutti i protocolli 
+
+
+| VM vVol | Backup secondari coerenti con gli arresti anomali | ONTAP SnapMirror Restore per tutti i protocolli 
+
+
+| VM FlexGroup | Backup primari  a| 
+Ambienti NFS: * ONTAP Single File SnapRestore se si utilizza ONTAP versione 9.10.1 e successive * Clonazione e montaggio con Storage VMotion su versioni precedenti ONTAP
+
+Ambienti VMFS: non supportati per FlexGroups
+
+
+
+| VM FlexGroup | Backup secondari  a| 
+Ambienti NFS:
+
+* Ripristino di ONTAP SnapMirror se si utilizza ONTAP versione 9.10.1 e successive
+* Clona e monta con Storage VMotion per le versioni precedenti ONTAP
+
+
+Ambienti VMFS: non supportati per FlexGroups
+
+|===
+
+NOTE: Non è possibile ripristinare una VM vVol dopo un ribilanciamento del contenitore vVol.
+
+Le operazioni di ripristino dei file guest vengono eseguite utilizzando operazioni di clonazione e montaggio (non Storage VMotion) sia negli ambienti NFS che VMFS.
+
+
+IMPORTANT: Durante un'operazione di ripristino, potresti riscontrare l'errore `Host unresolved volumes is null` O `Exception while calling pre-restore on SCV….Error mounting cloned LUN as datastore…` Ciò si verifica quando il SnapCenter Plug-in for VMware vSphere tenta di rinnovare la firma del clone.  A causa delle restrizioni di VMware, il SnapCenter Plug-in for VMware vSphere non è in grado di controllare il valore di nuova firma automatica nelle configurazioni host ESXi avanzate.  Per l'archiviazione NVMe su TCP e NVMe su FC, SCV non può aggiungere controller dinamicamente quando viene aggiunto un nuovo sottosistema.  Prima dell'operazione di montaggio è necessario effettuare la mappatura necessaria.
+
+Fare riferimento a https://kb.netapp.com/mgmt/SnapCenter/SCV_clone_or_restores_fail_with_error_'Host_Unresolved_volumes_is_null'#["Articolo della Knowledge Base: La clonazione o il ripristino di SCV falliscono con l'errore "I volumi host non risolti sono nulli""^] per maggiori informazioni sull'errore.

@@ -1,0 +1,40 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_upgrade_to_a_new_patch.html 
+keywords:  
+summary: 'Se si esegue l"aggiornamento a una nuova patch della stessa versione, è necessario cancellare la cache SnapCenter Plug-in for VMware vSphere sul vCenter Web Server e riavviare il server prima dell"aggiornamento o della registrazione.' 
+---
+= Aggiorna a una nuova patch della stessa versione del SnapCenter Plug-in for VMware vSphere
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Se si esegue l'aggiornamento a una nuova patch della stessa versione, è necessario cancellare la cache SnapCenter Plug-in for VMware vSphere sul vCenter Web Server e riavviare il server prima dell'aggiornamento o della registrazione.
+
+Se la cache del plug-in non viene cancellata, i lavori recenti non vengono visualizzati nella Dashboard e nel monitor dei lavori nei seguenti scenari:
+
+* Il SnapCenter Plug-in for VMware vSphere è stato distribuito tramite vCenter e successivamente aggiornato con una patch nella stessa versione.
+* L'appliance virtuale SnapCenter VMware è stata distribuita in vCenter 1.  Successivamente, questo SnapCenter Plug-in for VMware vSphere è stato registrato su un nuovo vCenter2.  Una nuova istanza del SnapCenter Plug-in for VMware vSphere viene creata con una patch e registrata su vCenter1.  Tuttavia, poiché vCenter1 contiene ancora il plug-in memorizzato nella cache del primo SnapCenter Plug-in for VMware vSphere senza la patch, è necessario cancellare la cache.
+
+
+
+
+== Passaggi per svuotare la cache
+
+. Individuare il `vsphere-client-serenity` cartella, quindi individuare la `com.netapp.scv.client-<release-number>` cartella ed eliminarla.
++
+Il nome della cartella cambia per ogni versione.
+
++
+Fare riferimento alla documentazione VMware per la posizione del `vsphere-client-serenity` cartella per il tuo sistema operativo.
+
+. Riavviare vCenter Server.
++
+È quindi possibile aggiornare il SnapCenter Plug-in for VMware vSphere.
+
+

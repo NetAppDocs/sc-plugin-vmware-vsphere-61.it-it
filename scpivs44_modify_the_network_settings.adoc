@@ -1,0 +1,49 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_modify_the_network_settings.html 
+keywords:  
+summary: È possibile modificare le impostazioni di rete configurate nel SnapCenter Plug-in for VMware vSphere.  Queste impostazioni vengono utilizzate dal plug-in per accedere a vCenter. 
+---
+= Modificare le impostazioni di rete
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+È possibile modificare le impostazioni di rete configurate nel SnapCenter Plug-in for VMware vSphere.  Queste impostazioni vengono utilizzate dal plug-in per accedere a vCenter.
+
+.Prima di iniziare
+È necessario conoscere l'indirizzo IP e le credenziali di accesso per l'interfaccia utente grafica di gestione SnapCenter Plug-in for VMware vSphere . È inoltre necessario annotare il token MFA generato dalla console di manutenzione.
+
+* L'indirizzo IP è stato visualizzato quando è stato distribuito il SnapCenter Plug-in for VMware vSphere .
+* Utilizzare le credenziali di accesso fornite durante la distribuzione del SnapCenter Plug-in for VMware vSphere o come successivamente modificate.
+* Generare un token MFA a 6 cifre utilizzando le opzioni di configurazione del sistema della console di manutenzione.
+
+
+.Passi
+. Accedi all'interfaccia utente grafica di gestione SnapCenter Plug-in for VMware vSphere .
++
+Utilizzare il formato `\https://<appliance-IP-address>:8080`
+
+. Selezionare l'icona Impostazioni nella barra degli strumenti in alto.
++
+image:scpivs44_image31.png["SnapCenter Plug-in for VMware vSphere"]
+
+. Nella pagina *Impostazioni*, nella sezione *Impostazioni di rete*, seleziona l'indirizzo *IPv4* o *IPv6*, quindi seleziona *Modifica*.
++
+Inserisci le nuove informazioni e seleziona *Salva*.
+
+. Se si desidera rimuovere un'impostazione di rete, procedere come segue:
++
+** IPv4: nel campo *Indirizzo IP*, immettere `0.0.0.0` e poi seleziona *Salva*.
+** IPv6: Nel campo *Indirizzo IP*: immettere `: :0` e poi seleziona *Salva*.
+
+
+
+
+
+NOTE: Se si utilizzano sia indirizzi IPv4 che IPv6, non è possibile rimuovere entrambe le impostazioni di rete.  La rete rimanente deve specificare i campi Server DNS e Domini di ricerca.

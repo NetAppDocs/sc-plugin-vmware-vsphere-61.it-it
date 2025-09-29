@@ -1,0 +1,43 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_download_the_ova_open_virtual_appliance.html 
+keywords:  
+summary: Il file .tar include OVA, ovvero un set di microservizi per la protezione dei dati di VM e datastore, e il file del certificato. 
+---
+= Scarica l'Open Virtual Appliance (OVA)
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Prima di installare Open Virtual Appliance (OVA), aggiungere il certificato a vCenter.  Il file .tar contiene i certificati OVA, Entrust Root e Intermediate; i certificati si trovano nella cartella dei certificati.  La distribuzione OVA è supportata in VMware vCenter 7u1 e versioni successive.
+
+Nelle versioni VMware vCenter 7.0.3 e successive, l'OVA firmato dal certificato Entrust non è più attendibile.  Per risolvere il problema è necessario eseguire la seguente procedura.
+
+.Passi
+. Per scaricare il plug-in SnapCenter per VMware:
++
+** Accedi al sito di supporto NetApp ( https://mysupport.netapp.com/products/index.html["https://mysupport.netapp.com/products/index.html"^] ).
+** Dall'elenco dei prodotti, seleziona * SnapCenter Plug-in for VMware vSphere*, quindi seleziona il pulsante *Scarica l'ultima versione*.
+** Scarica il SnapCenter Plug-in for VMware vSphere `.tar` file in qualsiasi posizione.
+
+
+. Estrarre il contenuto del file tar.  Il file tar contiene la cartella OVA e certs.  La cartella certs contiene i certificati Entrust Root e Intermediate.
+. Accedere al vCenter Server tramite vSphere Client.
+. Vai su *Amministrazione > Certificati > Gestione certificati*.
+. Accanto a *Certificati radice attendibili*, seleziona *Aggiungi*
++
+** Vai alla cartella _certs_.
+** Selezionare i certificati Entrust Root e Intermediate.
+** Installare ciascun certificato uno alla volta.
+
+
+. I certificati vengono aggiunti a un pannello in *Certificati radice attendibili*. Una volta installati i certificati, OVA può essere verificato e distribuito.
+
+
+
+NOTE: Se il file OVA scaricato non è manomesso, nella colonna *Editore* viene visualizzato *Certificato attendibile*.

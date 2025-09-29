@@ -1,0 +1,33 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_restore_a_specific_backup_of_the_mysql_database.html 
+keywords:  
+summary: 'È possibile utilizzare la console di manutenzione per ripristinare un backup specifico del database MySQL (chiamato anche database NSM) per il SnapCenter Plug-in for VMware vSphere .' 
+---
+= Ripristina un backup specifico del database MySQL
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+È possibile utilizzare la console di manutenzione per ripristinare un backup specifico del database MySQL (chiamato anche database NSM) per il SnapCenter Plug-in for VMware vSphere .
+
+.Passi
+. Aprire una finestra della console di manutenzione.
++
+link:scpivs44_access_the_maintenance_console.html["Accedi alla console di manutenzione"^] .
+
+. Dal menu principale, immettere l'opzione *1) Configurazione applicazione*.
+. Dal menu Configurazione applicazione, immettere l'opzione *6) Backup e ripristino MySQL*.
+. Dal menu di configurazione di backup e ripristino di MySQL, immettere l'opzione *2) Elenca backup MySQL*, quindi prendere nota del backup che si desidera ripristinare.
+. Dal menu di configurazione di backup e ripristino di MySQL, immettere l'opzione *4) Ripristina backup MySQL*.
+. Alla richiesta "Ripristina utilizzando il backup più recente", immettere *n*.
+. Alla richiesta "Backup da cui ripristinare", immettere il nome del backup, quindi premere *Invio*.
++
+Il database MySQL di backup selezionato viene ripristinato nella sua posizione originale.
+
+

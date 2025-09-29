@@ -1,0 +1,36 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_generate_a_support_bundle_from_the_snapcenter_plug-in_for_vmware_vsphere_gui.html 
+keywords:  
+summary: È possibile generare un pacchetto di supporto dalla GUI SnapCenter Plug-in for VMware vSphere . 
+---
+= Genera un pacchetto di supporto dal SnapCenter Plug-in for VMware vSphere
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+.Prima di iniziare
+[role="lead"]
+Per accedere all'interfaccia utente grafica di gestione SnapCenter Plug-in for VMware vSphere , è necessario conoscere l'indirizzo IP e le credenziali di accesso. È inoltre necessario annotare il token MFA generato dalla console di manutenzione.
+
+* L'indirizzo IP è stato visualizzato quando è stato distribuito il SnapCenter Plug-in for VMware vSphere .
+* Utilizzare le credenziali di accesso fornite durante la distribuzione del SnapCenter Plug-in for VMware vSphere o come successivamente modificate.
+* Generare un token MFA a 6 cifre utilizzando le opzioni di configurazione del sistema della console di manutenzione.
+
+
+.Passi
+. Accedi al SnapCenter Plug-in for VMware vSphere .
++
+Utilizzare il formato `\https://<OVA-IP-address>:8080` .
+
+. Selezionare l'icona Impostazioni nella barra degli strumenti in alto.
++
+image:scpivs44_image10.png["Plug-in SnapCenter per l'interfaccia VMware vSphere"]
+
+. Nella pagina *Impostazioni*, nella sezione *Supporto*, seleziona *Genera pacchetto di supporto*.
+. Dopo aver generato il pacchetto di supporto, seleziona il collegamento fornito per scaricare il pacchetto su NetApp.
+

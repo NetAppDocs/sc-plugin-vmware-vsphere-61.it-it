@@ -1,0 +1,62 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_manage_backups.html 
+keywords:  
+summary: È possibile rinominare ed eliminare i backup eseguiti dal SnapCenter Plug-in for VMware vSphere. È anche possibile eliminare più backup contemporaneamente. 
+---
+= Gestire i backup
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+È possibile rinominare ed eliminare i backup eseguiti dal SnapCenter Plug-in for VMware vSphere. È anche possibile eliminare più backup contemporaneamente.
+
+
+
+== Rinomina i backup
+
+È possibile rinominare il SnapCenter Plug-in for VMware vSphere se si desidera fornire un nome migliore per migliorare la ricercabilità.
+
+
+NOTE: Il sistema di archiviazione ASA r2 non supporta la ridenominazione dei backup.
+
+.Passi
+. Selezionare *Menu* e selezionare l'opzione di menu *Host e cluster*, quindi selezionare una VM, quindi selezionare la scheda *Configura* e infine selezionare *Backup* nella sezione * SnapCenter Plug-in for VMware vSphere*.
++
+image:scv50_image1.png["Schermata del client vSphere"]
+
+. Nella scheda Configura, seleziona un backup e seleziona *Rinomina*.
+. Nella finestra di dialogo *Rinomina backup*, immettere il nuovo nome e selezionare *OK*.
++
+Non utilizzare i seguenti caratteri speciali nei nomi di VM, datastore, policy, backup o gruppi di risorse: & * $ # @ ! \ / : * ? " < > - | ; ' e spazio. È consentito il carattere di sottolineatura (_).
+
+
+
+
+
+== Elimina i backup
+
+È possibile eliminare il SnapCenter Plug-in for VMware vSphere se il backup non è più necessario per altre operazioni di protezione dei dati.  È possibile eliminare un backup o più backup contemporaneamente.
+
+.Prima di iniziare
+Non è possibile eliminare i backup montati.  È necessario smontare un backup prima di poterlo eliminare.
+
+.Informazioni su questo compito
+gli snapshot sullo storage secondario sono gestiti dalle impostazioni di conservazione ONTAP , non dal SnapCenter Plug-in for VMware vSphere.  Pertanto, quando si utilizza il SnapCenter Plug-in for VMware vSphere per eliminare un backup, gli snapshot sullo storage primario vengono eliminati, ma quelli sullo storage secondario no.  Se uno snapshot è ancora presente nell'archivio secondario, il SnapCenter Plug-in for VMware vSphere conserva i metadati associati al backup per supportare le richieste di ripristino.  Quando il processo di conservazione ONTAP elimina lo snapshot secondario, il SnapCenter Plug-in for VMware vSphere elimina i metadati utilizzando un processo di eliminazione, eseguito a intervalli regolari.
+
+. Selezionare *Menu* e selezionare l'opzione di menu *Host e cluster*, quindi selezionare una VM, quindi selezionare la scheda *Configura* e infine selezionare *Backup* nella sezione * SnapCenter Plug-in for VMware vSphere*.
++
+image:scv50_image1.png["Finestra del client vSphere"]
+
+. Selezionare uno o più backup e selezionare *Elimina*.
++
+È possibile selezionare un massimo di 40 backup da eliminare.
+
+. Selezionare *OK* per confermare l'operazione di eliminazione.
+. Aggiornare l'elenco dei backup selezionando l'icona di aggiornamento sulla barra dei menu vSphere a sinistra.
+

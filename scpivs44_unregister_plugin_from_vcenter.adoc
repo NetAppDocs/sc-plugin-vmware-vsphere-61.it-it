@@ -1,0 +1,25 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_unregister_plugin_from_vcenter.html 
+keywords:  
+summary: Se si arresta il servizio SnapCenter Plug-in for VMware vSphere in un vCenter in modalità collegata, i gruppi di risorse non saranno disponibili in tutti i vCenter collegati, anche quando il servizio SnapCenter Plug-in for VMware vSphere è in esecuzione negli altri vCenter collegati.  È necessario annullare manualmente la registrazione del SnapCenter Plug-in for VMware vSphere . 
+---
+= Annulla la registrazione SnapCenter Plug-in for VMware vSphere da vCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Se si arresta il servizio SnapCenter Plug-in for VMware vSphere in un vCenter in modalità collegata, i gruppi di risorse non saranno disponibili in tutti i vCenter collegati, anche quando il servizio SnapCenter Plug-in for VMware vSphere è in esecuzione negli altri vCenter collegati.
+
+È necessario annullare manualmente la registrazione del SnapCenter Plug-in for VMware vSphere .
+
+.Passi
+. Nel vCenter collegato in cui è stato arrestato il servizio SnapCenter Plug-in for VMware vSphere , accedere al gestore Managed Object Reference (MOB).
+. Nell'opzione Proprietà, seleziona *contenuto* nella colonna Valore, quindi nella schermata successiva seleziona *ExtensionManager* nella colonna Valore per visualizzare un elenco delle estensioni registrate.
+. Annullare la registrazione delle estensioni `com.netapp.scv.client` E `com.netapp.aegis` .
+

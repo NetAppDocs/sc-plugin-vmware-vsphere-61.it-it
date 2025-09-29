@@ -1,0 +1,19 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_quick_start_overview.html 
+keywords:  
+summary: 'La documentazione di avvio rapido fornisce un insieme condensato di istruzioni per la distribuzione del SnapCenter Plug-in for VMware vSphere e l"abilitazione del SnapCenter Plug-in for VMware vSphere.  Queste istruzioni sono destinate ai clienti che non hanno ancora installato SnapCenter e che desiderano proteggere solo VM e datastore.' 
+---
+= Panoramica
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+La documentazione di avvio rapido fornisce un insieme condensato di istruzioni per la distribuzione del SnapCenter Plug-in for VMware vSphere e l'abilitazione del SnapCenter Plug-in for VMware vSphere.  Queste istruzioni sono destinate ai clienti che non hanno ancora installato SnapCenter e che desiderano proteggere solo VM e datastore.
+
+Prima di iniziare, fare riferimento alink:scpivs44_deployment_planning_and_requirements.html["Pianificazione e requisiti di distribuzione"] .

@@ -1,0 +1,33 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_view_vm_and_datastore_backups.html 
+keywords:  
+summary: Quando ci si prepara a eseguire il backup o il ripristino di una macchina virtuale o di un datastore, potrebbe essere opportuno visualizzare tutti i backup disponibili per quella risorsa e visualizzarne i dettagli. 
+---
+= Visualizza i backup di VM e datastore
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Quando ci si prepara a eseguire il backup o il ripristino di una macchina virtuale o di un datastore, potrebbe essere opportuno visualizzare tutti i backup disponibili per quella risorsa e visualizzarne i dettagli.
+
+.Informazioni su questo compito
+La prima volta che si esplorano cartelle di file di grandi dimensioni, ad esempio cartelle da 10.000 file, potrebbe volerci uno o più minuti.  Le sessioni di navigazione successive richiedono meno tempo.
+
+.Passi
+. Accedi al vCenter Server.
+. Vai alla pagina *Inventario* e seleziona un datastore o una VM.
+. Nel riquadro di destra, seleziona *Configura* > * SnapCenter Plug-in for VMware vSphere* > *Backup*.
++
+image:backup-view.png["Visualizzazione dei backup"]
+
++
+Se l'opzione *Abilita blocco snapshot secondario* non è selezionata durante la fase di creazione del criterio, per impostazione predefinita verrà utilizzato il valore impostato per l'opzione *Abilita blocco snapshot primario*.  Nell'elenco dei backup, il trattino nel campo *Scadenza blocco snapshot secondario* indica che i periodi di blocco primario e secondario sono gli stessi.
+
+. Seleziona il backup che vuoi visualizzare.
+

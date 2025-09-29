@@ -1,0 +1,44 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_overview_of_different_snapcenter_guis.html 
+keywords:  
+summary: 'SnapCenter Plug-in for VMware vSphere è un plug-in autonomo, diverso dagli altri plug-in SnapCenter . È necessario utilizzare l"interfaccia utente grafica del client VMware vSphere in vCenter per tutte le operazioni di backup e ripristino per VM, VMDK e datastore.' 
+---
+= Panoramica delle diverse interfacce grafiche utente SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Nell'ambiente SnapCenter è necessario utilizzare l'interfaccia utente grafica appropriata per eseguire operazioni di protezione e gestione dei dati.
+
+SnapCenter Plug-in for VMware vSphere è un plug-in autonomo, diverso dagli altri plug-in SnapCenter . È necessario utilizzare l'interfaccia utente grafica del client VMware vSphere in vCenter per tutte le operazioni di backup e ripristino per VM, VMDK e datastore.  È inoltre possibile utilizzare la dashboard dell'interfaccia utente grafica del client Web per monitorare l'elenco delle VM protette e non protette.  Per tutte le altre operazioni del plug-in SnapCenter (plug-in basati su applicazioni), come backup, ripristino e monitoraggio dei processi, è possibile utilizzare l'interfaccia utente grafica SnapCenter .
+
+Per proteggere le VM e gli archivi dati, è possibile utilizzare l'interfaccia client VMware vSphere. L'interfaccia utente grafica del client Web si integra con la tecnologia snapshot di NetApp sul sistema di storage. Ciò consente di eseguire il backup di VM e datastore in pochi secondi e di ripristinare le VM senza dover disconnettere un host ESXi.
+
+È disponibile anche un'interfaccia utente grafica di gestione per eseguire operazioni amministrative sul SnapCenter Plug-in for VMware vSphere.
+
+Nella tabella seguente vengono illustrate le operazioni eseguite dall'interfaccia utente grafica SnapCenter .
+
+|===
+| Utilizza questa interfaccia grafica… | Per eseguire queste operazioni... | E per accedere a questi backup... 
+
+
+| Interfaccia utente grafica del client SnapCenter vSphere | Backup di VM e datastore Collegamento e scollegamento di VMDK Montaggio e smontaggio di datastore Ripristino di VM e VMDK Ripristino di file e cartelle guest | Backup di VM e datastore tramite l'interfaccia utente grafica del client VMware vSphere. 
+
+
+| Interfaccia grafica utente SnapCenter | Backup e ripristino di database e applicazioni su macchine virtuali, inclusa la protezione di database per Microsoft SQL Server, Microsoft Exchange e Oracle. Clonazione del database | Backup eseguiti tramite l'interfaccia grafica utente SnapCenter . 
+
+
+| SnapCenter Plug-in for VMware vSphere | Modificare la configurazione di rete Generare un pacchetto di supporto Modificare le impostazioni del server NTP Disabilitare/abilitare il plug-in | N / A 
+
+
+| Interfaccia grafica utente di vCenter | Aggiungere ruoli SCV agli utenti di vCenter Active Directory Aggiungere l'accesso alle risorse a utenti o gruppi | N / A 
+|===
+Per operazioni di backup e ripristino coerenti con la VM, è necessario utilizzare l'interfaccia utente grafica del client VMware vSphere. Sebbene sia possibile eseguire alcune operazioni utilizzando gli strumenti VMware, ad esempio il montaggio o la ridenominazione di un datastore, tali operazioni non verranno registrate nel repository SnapCenter e non saranno riconosciute.
+
+SnapCenter non supporta singoli snapshot di database e VM contemporaneamente. I backup per VM e database devono essere pianificati ed eseguiti in modo indipendente, il che crea snapshot separati anche se i database e le VM sono ospitati nello stesso volume. I backup basati sulle applicazioni devono essere pianificati tramite l'interfaccia utente grafica SnapCenter ; i backup coerenti con la VM devono essere pianificati tramite l'interfaccia utente grafica del client VMware vSphere.

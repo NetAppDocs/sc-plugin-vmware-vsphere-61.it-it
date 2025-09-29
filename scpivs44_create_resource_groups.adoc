@@ -1,0 +1,25 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_create_resource_groups.html 
+keywords:  
+summary:  
+---
+= Creare gruppi di risorse
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Per creare gruppi di risorse, seguire i passaggi indicati di seguito.
+
+. Nel riquadro di navigazione sinistro del plug-in SCV, seleziona *Gruppi di risorse*, quindi seleziona *Crea*.
+. Immettere le informazioni richieste in ogni pagina della procedura guidata Crea gruppo di risorse, selezionare le VM e gli archivi dati da includere nel gruppo di risorse, quindi selezionare i criteri di backup da applicare al gruppo di risorse.  Aggiungere i dettagli della protezione secondaria remota e specificare la pianificazione del backup.
+
+
+I backup vengono eseguiti come specificato nei criteri di backup configurati per il gruppo di risorse.
+
+È possibile eseguire un backup su richiesta dalla pagina *Gruppi di risorse* selezionandoimage:scpivs44_image38.png["icona di riproduzione"] *Corri ora*.

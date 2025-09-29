@@ -1,0 +1,54 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_mount_a_backup.html 
+keywords:  
+summary: È possibile montare un datastore tradizionale da un backup se si desidera accedere ai file nel backup. È possibile montare il backup sullo stesso host ESXi in cui è stato creato oppure su un host ESXi alternativo che abbia lo stesso tipo di configurazione host e VM. È possibile montare un datastore più volte su un host. 
+---
+= Montare un backup
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+È possibile montare un datastore tradizionale da un backup se si desidera accedere ai file nel backup. È possibile montare il backup sullo stesso host ESXi in cui è stato creato oppure su un host ESXi alternativo che abbia lo stesso tipo di configurazione host e VM. È possibile montare un datastore più volte su un host.
+
+Non è possibile montare un datastore vVol.
+
+.Prima di iniziare
+* Assicurarsi che l'host ESXi alternativo possa connettersi allo storage
++
+Se si desidera effettuare il montaggio su un host ESXi alternativo, è necessario assicurarsi che l'host ESXi alternativo possa connettersi allo storage e disponga di quanto segue:
+
++
+** UID e GID uguali a quelli dell'host originale
+** Stessa appliance virtuale per la versione SnapCenter Plug-in for VMware vSphere dell'host originale
+
+
+* Quando si utilizza il protocollo iSCSI, assicurarsi che gli iniziatori per il sistema di archiviazione siano mappati sull'host ESXi.  Quando si utilizza il protocollo NVMe, aggiungere controller per mappare il sottosistema richiesto all'host ESXi.
+* Pulisci LUN/Namespace obsoleto
++
+Poiché l'host ESXi può rilevare solo un LUN/Namespace univoco per datastore, l'operazione non riuscirà se ne trova più di uno.  Ciò può verificarsi se si avvia un'operazione di montaggio prima che un'operazione di montaggio precedente sia terminata, se si clona manualmente LUN/Namespace o se i cloni non vengono eliminati dall'archiviazione durante un'operazione di smontaggio.  Per evitare di scoprire più cloni, è necessario ripulire tutti i LUN/Namespace obsoleti nell'archivio.
+
+
+
+.Informazioni su questo compito
+Un'operazione di montaggio potrebbe non riuscire se il livello di archiviazione del FabricPool in cui si trova il datastore non è disponibile.
+
+.Passi
+. Nella pagina dei collegamenti del client VMware vSphere, selezionare *Storage*.
+. Fare clic con il pulsante destro del mouse su un datastore e selezionare * SnapCenter Plug-in for VMware vSphere* > *Monta backup*.
+. Nella pagina *Monta Datastore*, seleziona un backup e una posizione di backup (primaria o secondaria), quindi seleziona *Fine*.
+. Facoltativo: per verificare che il datastore sia montato, procedere come segue:
++
+.. Selezionare *Menu* nella barra degli strumenti, quindi selezionare *Archiviazione* dall'elenco a discesa.
+.. Il riquadro di navigazione a sinistra visualizza il datastore montato in cima all'elenco.
++
+Per impedire la creazione di nuovi snapshot quando si clona il volume, disattivare la pianificazione ONTAP per il volume SnapVault .  Gli snapshot esistenti in precedenza non vengono eliminati.
+
+
+
+

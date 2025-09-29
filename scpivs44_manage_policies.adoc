@@ -1,0 +1,81 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_manage_policies.html 
+keywords:  
+summary: È possibile creare, modificare, visualizzare, scollegare ed eliminare i criteri di backup per il SnapCenter Plug-in for VMware vSphere.  Per eseguire operazioni di protezione dei dati sono necessarie delle policy. 
+---
+= Gestire le politiche
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+È possibile creare, modificare, visualizzare, scollegare ed eliminare i criteri di backup per il SnapCenter Plug-in for VMware vSphere.  Per eseguire operazioni di protezione dei dati sono necessarie delle policy.
+
+
+
+== Distacca le politiche
+
+È possibile scollegare i criteri da un gruppo di risorse SnapCenter Plug-in for VMware vSphere quando non si desidera più che tali criteri governino la protezione dei dati per le risorse.  È necessario scollegare una policy prima di poterla rimuovere o prima di modificarne la frequenza di pianificazione.
+
+.Informazioni su questo compito
+Le linee guida per la separazione dei criteri dal SnapCenter Plug-in for VMware vSphere sono diverse dalle linee guida per i gruppi di risorse SnapCenter .  Per un gruppo di risorse client VMware vSphere, è possibile scollegare tutte le policy, lasciando il gruppo di risorse senza policy.  Tuttavia, per eseguire operazioni di protezione dei dati su quel gruppo di risorse, è necessario allegare almeno un criterio.
+
+.Passi
+. Nel riquadro di navigazione sinistro del plug-in SCV, seleziona *Gruppi di risorse*, quindi seleziona un gruppo di risorse e seleziona *Modifica*.
+. Nella pagina *Criteri* della procedura guidata *Modifica gruppo di risorse*, deselezionare la casella accanto ai criteri che si desidera scollegare.
++
+È anche possibile aggiungere una policy al gruppo di risorse selezionando la policy stessa.
+
+. Apportare eventuali modifiche aggiuntive al gruppo di risorse nel resto della procedura guidata, quindi selezionare *Fine*.
+
+
+
+
+== Modificare le politiche
+
+È possibile modificare i criteri per un gruppo di risorse SnapCenter Plug-in for VMware vSphere .  È possibile modificare la frequenza, le opzioni di replica, le impostazioni di conservazione degli snapshot o le informazioni sugli script mentre un criterio è associato a un gruppo di risorse.
+
+.Informazioni su questo compito
+La modifica delle policy di backup SnapCenter Plug-in for VMware vSphere è diversa dalla modifica delle policy di backup per i plug-in basati sulle applicazioni SnapCenter .  Non è necessario scollegare i criteri dai gruppi di risorse quando si modificano i criteri del plug-in.
+
+Prima di modificare le impostazioni di replica o conservazione, è opportuno considerare le possibili conseguenze.
+
+* Aumento delle impostazioni di replicazione o conservazione
++
+I backup continuano ad accumularsi finché non raggiungono la nuova impostazione.
+
+* Riduzione delle impostazioni di replicazione o conservazione
++
+I backup in eccesso rispetto alla nuova impostazione verranno eliminati quando verrà eseguito il backup successivo.
+
+
+
+
+NOTE: Per modificare la pianificazione di una policy SnapCenter Plug-in for VMware vSphere , è necessario modificare la pianificazione nel gruppo di risorse del plug-in.
+
+.Passi
+. Nel riquadro di navigazione sinistro del plug-in SCV, seleziona *Criteri*, quindi seleziona un criterio e seleziona *Modifica*.
+. Modificare i campi della policy.
+. Al termine, seleziona *Aggiorna*.
+
+
+Le modifiche avranno effetto quando verrà eseguito il successivo backup pianificato.
+
+
+
+== Elimina le policy
+
+Se non hai più bisogno di un criterio di backup configurato per SnapCenter Plug-in for VMware vSphere, potresti volerlo eliminare.
+
+.Prima di iniziare
+Prima di poter eliminare il criterio, è necessario averlo scollegato da tutti i gruppi di risorse nell'appliance virtuale per SnapCenter .
+
+.Passi
+. Nel riquadro di navigazione sinistro del plug-in SCV, seleziona *Criteri*, quindi seleziona un criterio e seleziona *Rimuovi*.
+. Nella finestra di dialogo di conferma selezionare *OK*.
+

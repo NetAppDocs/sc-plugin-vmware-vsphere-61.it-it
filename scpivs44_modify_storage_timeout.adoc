@@ -1,0 +1,29 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_modify_storage_timeout.html 
+keywords:  
+summary: Anche se in passato i backup sono stati eseguiti correttamente, potrebbero iniziare a non funzionare durante il periodo di attesa del SnapCenter Plug-in for VMware vSphere affinché il sistema di storage superi il periodo di timeout configurato.  Se si verifica questa condizione, è possibile aumentare il timeout configurato. 
+---
+= Modificare il timeout di archiviazione configurato
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Anche se in passato i backup sono stati eseguiti correttamente, potrebbero iniziare a non funzionare durante il periodo di attesa del SnapCenter Plug-in for VMware vSphere affinché il sistema di storage superi il periodo di timeout configurato.  Se si verifica questa condizione, è possibile aumentare il timeout configurato.
+
+Potresti riscontrare l'errore `Unable to discover resources on SCV: Unable to get storage details for datastore <xxx>…`
+
+.Passi
+. Nel riquadro di navigazione sinistro del plug-in SCV, selezionare *Sistemi di archiviazione*.
+. Nella pagina Sistemi di archiviazione, selezionare il sistema di archiviazione da modificare e selezionare *Modifica*.
+. Nel campo Timeout, aumentare il numero di secondi.
++
+
+TIP: Per ambienti di grandi dimensioni si consigliano 180 secondi.
+
+

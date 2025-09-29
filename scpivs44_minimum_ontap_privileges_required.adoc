@@ -1,0 +1,86 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_minimum_ontap_privileges_required.html 
+keywords:  
+summary: I privilegi ONTAP minimi richiesti variano a seconda dei plug-in SnapCenter utilizzati per la protezione dei dati. 
+---
+= Privilegi ONTAP richiesti
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+I privilegi ONTAP minimi richiesti variano a seconda dei plug-in SnapCenter utilizzati per la protezione dei dati.
+
+
+NOTE: A partire da SnapCenter Plug-in per VMware (SCV) 5.0, è necessario aggiungere applicazioni di tipo HTTP e ONTAPI come metodi di accesso utente per tutti gli utenti ONTAP con accesso personalizzato basato sui ruoli a SCV.  Senza l'accesso a queste applicazioni, i backup non riusciranno.  È necessario riavviare il servizio SCV per riconoscere le modifiche ai metodi di accesso degli utenti ONTAP .
+
+
+
+== Privilegi ONTAP minimi richiesti
+
+Tutti i plug-in SnapCenter richiedono i seguenti privilegi minimi.
+
+|===
+
+
+| Comandi con accesso illimitato: privilegi ONTAP minimi. 
+
+
+| evento genera-autosupport-log 
+
+
+| cronologia lavori mostra lavoro mostra lavoro ferma 
+
+
+| lun lun crea lun elimina lun igroup aggiungi lun igroup crea lun igroup elimina lun igroup rinomina lun igroup mostra mappatura lun aggiungi-nodi-di-segnalazione mappatura lun crea mappatura lun elimina mappatura lun rimuovi-nodi-di-segnalazione mappatura lun mostra modifica lun sposta-in-volume lun offline lun online lun prenotazione persistente cancella lun ridimensiona lun seriale lun mostra 
+
+
+| snapmirror list-destinations snapmirror policy add-rule snapmirror policy modify-rule snapmirror policy remove-rule snapmirror policy show snapmirror restore snapmirror show snapmirror show-history snapmirror update snapmirror update-ls-set 
+
+
+| Versione 
+
+
+| volume clone crea volume clone mostra volume clone dividi avvia volume clone stato divisione volume clone dividi arresta volume crea volume elimina volume distruggi volume file clone crea file volume mostra utilizzo disco volume offline volume online volume funzionalità gestita volume modifica volume qtree crea volume qtree elimina volume qtree modifica volume qtree mostra volume limita volume mostra snapshot volume crea snapshot volume elimina snapshot volume modifica snapshot volume modifica scadenza snaplock snapshot volume rinomina snapshot volume ripristina snapshot volume ripristina file snapshot volume mostra snapshot volume mostra delta smonta volume 
+
+
+| vserver cifs vserver cifs share crea vserver cifs share elimina vserver cifs shadowcopy mostra vserver cifs share mostra vserver cifs mostra vserver export-policy vserver export-policy crea vserver export-policy elimina vserver export-policy regola crea vserver export-policy regola mostra vserver export-policy mostra vserver iscsi connessione vserver iscsi mostra controller sottosistema nvme vserver controller sottosistema nvme vserver mostra sottosistema nvme vserver crea sottosistema nvme vserver elimina host sottosistema nvme vserver host sottosistema nvme vserver mostra host sottosistema nvme vserver aggiungi host sottosistema nvme vserver rimuovi mappa sottosistema nvme vserver mappa sottosistema nvme vserver mostra mappa sottosistema nvme vserver aggiungi mappa sottosistema nvme vserver rimuovi sottosistema nvme vserver modifica sottosistema nvme vserver mostra namespace nvme vserver crea namespace nvme vserver elimina namespace nvme vserver modifica nvme vserver spazio dei nomi mostra interfaccia di rete interfaccia di rete gruppi di failover 
+|===
+|===
+| Comandi di sola lettura: Privileges ONTAP minimi 
+
+
+| identità del cluster mostra interfaccia di rete mostra vserver vserver peer vserver mostra 
+|===
+|===
+| Comandi di accesso completo: privilegi ONTAP minimi 
+
+
+| mostra unità di archiviazione gruppo di coerenza 
+|===
+È possibile ignorare il comando _cluster identity show_ a livello di cluster quando si crea un ruolo da associare al data vServer.
+
+
+NOTE: È possibile ignorare i messaggi di avviso relativi ai comandi vServer non supportati.
+
+
+
+== Ulteriori informazioni ONTAP
+
+* Per utilizzare la funzione di sincronizzazione attiva SnapMirror è necessario disporre ONTAP 9.12.1 o versioni successive.
+* Per utilizzare la funzione TamperProof Snapshot (TPS):
++
+** Per SAN è necessario ONTAP 9.13.1 e versioni successive
+** Per NFS è necessario ONTAP 9.12.1 e versioni successive
+
+
+* Per i protocolli NVMe su TCP e NVMe su FC è necessario ONTAP 9.10.1 e versioni successive.
+
+
+
+NOTE: A partire dalla versione 9.11.1 ONTAP , la comunicazione con il cluster ONTAP avviene tramite API REST. L'utente ONTAP deve avere l'applicazione http abilitata. Tuttavia, se si riscontrano problemi con le API REST ONTAP , la chiave di configurazione 'FORCE_ZAPI' facilita il passaggio al flusso di lavoro ZAPI tradizionale. Potrebbe essere necessario aggiungere o aggiornare questa chiave utilizzando le API di configurazione e impostarla su true. Fare riferimento all'articolo della Knowledge Base, https://kb.netapp.com/mgmt/SnapCenter/How_to_use_RestAPI_to_edit_configuration_parameters_in_SCV["Come utilizzare RestAPI per modificare i parametri di configurazione in SCV"] per maggiori informazioni.

@@ -1,0 +1,19 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_deployment_workflow_for_existing_users.html 
+keywords:  
+summary: Puoi utilizzare questo flusso di lavoro se sei un utente SnapCenter e disponi di backup SnapCenter . 
+---
+= Flusso di lavoro di distribuzione per gli utenti esistenti
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Se sei un utente SnapCenter e disponi di backup SnapCenter , utilizza il seguente flusso di lavoro per iniziare.
+
+image:scpivs44_image3.png["Flusso di lavoro di distribuzione"]

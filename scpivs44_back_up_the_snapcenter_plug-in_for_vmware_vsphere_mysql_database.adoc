@@ -1,0 +1,41 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_back_up_the_snapcenter_plug-in_for_vmware_vsphere_mysql_database.html 
+keywords:  
+summary: 'Il SnapCenter Plug-in for VMware vSphere include un database MySQL (chiamato anche database NSM) che contiene i metadati di tutti i processi eseguiti dal plug-in. È consigliabile eseguire regolarmente il backup di questo repository.' 
+---
+= Eseguire il backup del SnapCenter Plug-in for VMware vSphere MySQL
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Il SnapCenter Plug-in for VMware vSphere include un database MySQL (chiamato anche database NSM) che contiene i metadati di tutti i processi eseguiti dal plug-in. È consigliabile eseguire regolarmente il backup di questo repository.
+
+È inoltre consigliabile eseguire il backup del repository prima di eseguire migrazioni o aggiornamenti.
+
+.Prima di iniziare
+Non avviare un processo di backup del database MySQL quando è già in esecuzione un processo di backup su richiesta.
+
+.Passi
+. Dal client VMware vSphere, selezionare la VM in cui si trova il SnapCenter Plug-in for VMware vSphere .
+. Nella scheda *Riepilogo* dell'appliance virtuale, selezionare *Avvia console remota* *o Avvia console Web* per aprire una finestra della console di manutenzione.
++
+image:scpivs44_image21.png["finestra della console di manutenzione"]
+
+. Dal menu principale, immettere l'opzione *1) Configurazione applicazione.*
+. Dal menu Configurazione applicazione, immettere l'opzione *6) Backup e ripristino MySQL.*
+. Dal menu di configurazione di backup e ripristino di MySQL, immettere l'opzione *1) Configura backup MySQL*.
+. Al prompt, immettere il percorso di backup per il repository, il numero di backup da conservare e l'ora di inizio del backup.
++
+Tutti gli input vengono salvati al momento dell'inserimento.  Una volta raggiunto il numero di backup da conservare, i backup più vecchi vengono eliminati quando vengono eseguiti nuovi backup.
+
++
+
+TIP: I backup del repository sono denominati "backup-<data>".  Poiché la funzione di ripristino del repository cerca il prefisso "backup", non dovresti modificarlo.
+
+

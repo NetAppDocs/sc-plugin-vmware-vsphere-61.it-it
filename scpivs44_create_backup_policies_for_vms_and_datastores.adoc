@@ -1,0 +1,162 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_create_backup_policies_for_vms_and_datastores.html 
+keywords:  
+summary: È necessario creare criteri di backup prima di utilizzare il SnapCenter Plug-in for VMware vSphere per eseguire il backup di VM e datastore. 
+---
+= Creare policy di backup per VM e datastore
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+È necessario creare criteri di backup prima di utilizzare il SnapCenter Plug-in for VMware vSphere per eseguire il backup di VM e datastore.
+
+.Prima di iniziare
+* È necessario aver letto i prerequisiti.
+* È necessario configurare le relazioni di archiviazione secondaria.
++
+** Se si replicano snapshot su un mirror o su un archivio secondario vault, è necessario configurare le relazioni e l'amministratore SnapCenter deve aver assegnato le VM di archiviazione sia per i volumi di origine che per quelli di destinazione.
+** Per trasferire correttamente gli snapshot nell'archivio secondario per le relazioni Version-FlexibleMirror su un datastore NFS o VMFS, assicurarsi che il tipo di policy SnapMirror sia Asynchronous Mirror e che l'opzione "all_source_snapshots" sia selezionata.
+** Quando il numero di snapshot sullo storage secondario (mirror-vault) raggiunge il limite massimo, l'attività di registrazione del backup e di applicazione della conservazione nell'operazione di backup fallisce con il seguente errore: `This snapshot is currently used as a reference snapshot by one or more SnapMirror relationships. Deleting the snapshot can cause future SnapMirror operations to fail.`
++
+Per correggere questo problema, configurare i criteri di conservazione SnapMirror per l'archiviazione secondaria per evitare di raggiungere il limite massimo di snapshot.
+
++
+Per informazioni su come gli amministratori assegnano le risorse agli utenti, fare riferimento a https://docs.netapp.com/us-en/snapcenter/get-started/rbac-snapcenter.html["Informazioni SnapCenter sull'utilizzo del controllo degli accessi basato sui ruoli"^] .
+
+
+
+* Per ottenere backup coerenti con la VM, è necessario che VMware Tools sia installato e in esecuzione.  Per mettere in quiescenza le VM sono necessari gli strumenti VMware.  I backup coerenti con la VM non sono supportati per le VM vVol.
+* La sincronizzazione attiva SnapMirror consente ai servizi aziendali di continuare a funzionare anche in caso di guasto completo del sito, supportando il failover delle applicazioni in modo trasparente utilizzando una copia secondaria.
++
+
+NOTE: La sincronizzazione attiva SnapMirror è supportata solo per i datastore VMFS.
+
++
+Per proteggere un datastore VMFS su una distribuzione SnapMirror ActiveSync, in qualità di amministratore SnapCenter è necessario:
+
++
+** Configurare i cluster e il mediatore come descritto nel rapporto tecnico: https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/mediator-install-task.html["Configurare ONTAP Mediator e cluster per SnapMirror ActiveSync"] .
+** Aggiungere il volume associato al datastore VMFS al gruppo di coerenza e creare una relazione di protezione dei dati utilizzando la policy di protezione _AutomatedFailOver_ o _AutomatedFailOverDuplex_ tra due sistemi di archiviazione ONTAP .  La policy _AutomatedFailOverDuplex_ è supportata dalla versione ONTAP 9.15.1 in poi.
+
+
+
+
+
+NOTE: Nella configurazione fan-out, il gruppo di coerenza non è supportato per il sito terziario.
+
+.Informazioni su questo compito
+La maggior parte dei campi presenti in queste pagine della procedura guidata sono autoesplicativi. Le seguenti informazioni descrivono alcuni dei campi per i quali potresti aver bisogno di assistenza.
+
+.Passi
+. Nel riquadro di navigazione sinistro del plug-in SCV, seleziona *Criteri*.
+. Nella pagina *Criteri*, seleziona *Crea* per avviare la procedura guidata.
+. Nella pagina *Nuova policy di backup* immettere il nome della policy e una descrizione.
++
+** Modalità collegata
++
+In modalità collegata, ogni vCenter ha un'appliance virtuale separata. Pertanto, è possibile utilizzare nomi duplicati nei vCenter.  Tuttavia, è necessario creare il criterio nello stesso vCenter del gruppo di risorse.
+
+** Caratteri non supportati
++
+Non utilizzare i seguenti caratteri speciali nei nomi di VM, datastore, cluster, policy, backup o gruppi di risorse: % & * $ # @ ! \ / : * ? " < > - | ; ' e spazio.
+
++
+È consentito il carattere di sottolineatura (_).
+
+
+
+. Specificare le impostazioni di frequenza.
++
+La policy specifica solo la frequenza del backup. La pianificazione specifica della protezione per il backup è definita nel gruppo di risorse. Pertanto, due o più gruppi di risorse possono condividere la stessa policy e la stessa frequenza di backup, ma avere pianificazioni di backup diverse.
+
+. Selezionare la casella di controllo *Periodo di blocco* per abilitare il blocco degli snapshot.  È possibile selezionare i periodi di blocco degli snapshot primari e secondari in Giorni/Mesi/Anni.
++
+
+NOTE: Indipendentemente dal valore di conservazione impostato nel criterio ONTAP SnapMirror , la copia dello snapshot secondario non viene eliminata prima del periodo di blocco dello snapshot secondario specificato.
+
+. Specificare le impostazioni di conservazione.
++
+
+IMPORTANT: Se si prevede di abilitare la replica SnapVault , è necessario impostare il conteggio di conservazione su 2 backup o un numero superiore.  Se si imposta il conteggio di conservazione su 1 backup da conservare, l'operazione di conservazione potrebbe non riuscire.  Ciò avviene perché il primo snapshot è lo snapshot di riferimento per la relazione SnapVault finché lo snapshot più recente non viene replicato sulla destinazione.
+
++
+
+NOTE: Il valore massimo di conservazione è 1018 backup. I backup non riusciranno se la conservazione è impostata su un valore superiore a quello supportato dalla versione ONTAP sottostante.  Ciò vale anche per gli archivi dati estesi.
+
+
+
+. Nei campi *Replica*, specificare il tipo di replica sullo storage secondario, come mostrato nella tabella seguente:
++
+|===
+| Per questo campo… | Fai questo… 
+
+
+| Aggiorna SnapMirror dopo il backup  a| 
+Selezionare questa opzione per creare copie mirror dei set di backup su un altro volume che ha una relazione SnapMirror con il volume di backup primario.  Se un volume è configurato con una relazione mirror-vault, è necessario selezionare solo l'opzione *Aggiorna SnapVault dopo il backup* se si desidera che i backup vengano copiati nelle destinazioni mirror-vault.
+
+
+NOTE: Questa opzione è supportata per gli archivi dati nei volumi FlexGroup nel SnapCenter Plug-in for VMware vSphere 4.5 e versioni successive.
+
+
+NOTE: Per proteggere il datastore VMFS durante la distribuzione SnapMirror ActiveSync, è necessario completare i prerequisiti indicati nella sezione _Prima di iniziare_ e abilitare *Aggiorna SnapMirror dopo il backup*.
+
+
+
+| Aggiorna SnapVault dopo il backup  a| 
+Selezionare questa opzione per eseguire la replica del backup da disco a disco su un altro volume che ha una relazione SnapVault con il volume di backup primario.
+
+
+IMPORTANT: Se un volume è configurato con una relazione mirror-vault, è necessario selezionare solo questa opzione se si desidera che i backup vengano copiati nelle destinazioni mirror-vault.
+
+
+NOTE: Questa opzione è supportata per gli archivi dati nei volumi FlexGroup nel SnapCenter Plug-in for VMware vSphere 4.5 e versioni successive.
+
+
+
+| Etichetta istantanea  a| 
+Immettere un'etichetta personalizzata facoltativa da aggiungere agli snapshot SnapVault e SnapMirror creati con questo criterio.  L'etichetta snapshot consente di distinguere gli snapshot creati con questo criterio dagli altri snapshot presenti sul sistema di archiviazione secondario.
+
+
+NOTE: Per le etichette degli snapshot è consentito un massimo di 31 caratteri.
+
+|===
+. Facoltativo: nei campi *Avanzate*, seleziona i campi necessari.  I dettagli del campo Avanzato sono elencati nella tabella seguente.
++
+|===
+| Per questo campo… | Fai questo… 
+
+
+| Coerenza della VM  a| 
+Selezionare questa casella per disattivare le VM e creare uno snapshot VMware ogni volta che viene eseguito il processo di backup.
+
+Questa opzione non è supportata per vVols.  Per le VM vVol vengono eseguiti solo backup coerenti con gli arresti anomali.
+
+
+IMPORTANT: Per eseguire backup coerenti con la VM, è necessario che gli strumenti VMware siano in esecuzione sulla VM.  Se gli strumenti VMware non sono in esecuzione, viene eseguito un backup coerente con l'arresto anomalo.
+
+
+NOTE: Se selezioni la casella Coerenza VM, le operazioni di backup potrebbero richiedere più tempo e più spazio di archiviazione.  In questo scenario, le VM vengono prima messe in pausa, poi VMware esegue uno snapshot coerente con la VM, quindi SnapCenter esegue l'operazione di backup e infine le operazioni della VM vengono riprese.  La memoria guest della VM non è inclusa negli snapshot di coerenza della VM.
+
+
+
+| Includere datastore con dischi indipendenti | Selezionare questa casella per includere nel backup tutti gli archivi dati con dischi indipendenti che contengono dati temporanei. 
+
+
+| Sceneggiature  a| 
+Immettere il percorso completo del prescript o del postscript che si desidera che il SnapCenter Plug-in for VMware vSphere esegua prima o dopo le operazioni di backup. Ad esempio, è possibile eseguire uno script per aggiornare le trap SNMP, automatizzare gli avvisi e inviare i registri.  Il percorso dello script viene convalidato al momento dell'esecuzione dello script.
+
+
+NOTE: Prescript e postscript devono trovarsi sulla VM dell'appliance virtuale.  Per immettere più script, premere *Invio* dopo ogni percorso di script per elencare ogni script su una riga separata.  Il carattere ";" non è consentito.
+
+|===
+. Seleziona *Aggiungi.*
++
+È possibile verificare che il criterio sia stato creato e rivederne la configurazione selezionando il criterio nella pagina Criteri.
+
+

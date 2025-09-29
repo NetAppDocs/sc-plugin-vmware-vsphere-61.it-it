@@ -1,0 +1,60 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_rest_api_workflows__mount_and_unmount_datastores.html 
+keywords:  
+summary: Per eseguire operazioni di montaggio e smontaggio per i backup del datastore utilizzando il SnapCenter Plug-in for VMware vSphere , è necessario seguire la sequenza prescritta di chiamate API REST. 
+---
+= Flussi di lavoro API REST per montare e smontare i datastore
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Per eseguire operazioni di montaggio e smontaggio per i backup del datastore utilizzando il SnapCenter Plug-in for VMware vSphere , è necessario seguire la sequenza prescritta di chiamate API REST.
+
+Per ogni API REST, aggiungi `\https://<server>:<port>` nella parte anteriore dell'API REST per formare un endpoint completo.
+
+
+
+== Per montare i datastore, seguire questo flusso di lavoro:
+
+|===
+| Fare un passo | API REST | Commenti 
+
+
+| 1 | Vai a `\http://<vCenter-IP>/mob` | Per trovare il datastore più vicino, consulta l'URL VMware Managed Objects.  Notare il *moref* per il datastore che si desidera montare. 
+
+
+| 2 | `/4.1/datastores/{moref}/
+backups` | `Get the list of backups for a datastore`ottiene un elenco di backup per il datastore specificato.  Passa il *moref* del passaggio 1.  Prendi nota del *backupId* che vuoi montare. 
+
+
+| 3 | `/4.1/datastores/backups/
+{backupId}/snapshotlocators` | `Get the list of Snapshot Locations`ottiene dettagli sulla posizione del backup specificato.  Passare il *backupId* dal passaggio 2.  Prendere nota del *datastore* e della posizione dall'elenco *snapshotLocationsList*. 
+
+
+| 4 | `/4.1/datastores/{moref}/
+availableEsxHosts` | `Get the list of Available Esxi Hosts`ottiene l'elenco degli host ESXi disponibili per le operazioni di montaggio.  Passa il *moref* del passaggio 1.  Notare le informazioni *availableEsxHostsList*. 
+
+
+| 5 | `/4.1/datastores/backups/
+{backupId}/mount` | `Mount datastores for a backup`monta il backup del datastore specificato.  Passare il *backupId* dal passaggio 2.  Negli attributi *datastore* e *location*, passare le informazioni da `snapshotLocationsList` nel passaggio 3.  Nell'attributo *esxHostName*, passare le informazioni da *availableEsxHostsList* nel passaggio 4. 
+|===
+
+
+== Per smontare i datastore, seguire questo flusso di lavoro:
+
+|===
+| Fare un passo | API REST | Commenti 
+
+
+| 1 | `/4.1/datastores/backups/
+{backupId}/mounted` | `Get the list of mounted datastores` . Prendi nota del datastore *moref*(s) che vuoi smontare. 
+
+
+| 2 | `/4.1/datastores/unmount` | `UnMount datastores for a backup`smonta il backup del datastore specificato.  Passare il datastore *moref*(s) dal passaggio 1. 
+|===

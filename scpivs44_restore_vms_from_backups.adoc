@@ -1,0 +1,137 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_restore_vms_from_backups.html 
+keywords:  
+summary: Quando si ripristina una macchina virtuale, è possibile sovrascrivere il contenuto esistente con la copia di backup selezionata oppure è possibile creare una copia della macchina virtuale. 
+---
+= Ripristinare le VM dai backup
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Quando si ripristina una macchina virtuale, è possibile sovrascrivere il contenuto esistente con la copia di backup selezionata oppure è possibile creare una copia della macchina virtuale.
+
+È possibile ripristinare le VM nelle seguenti posizioni:
+
+* Ripristina nella posizione originale
++
+** Al datastore originale montato sull'host ESXi originale (ciò sovrascrive la VM originale)
+
+
+* Ripristina in posizione alternativa
++
+** In un datastore diverso montato sull'host ESXi originale
+** Al datastore originale montato su un host ESXi diverso gestito dallo stesso vCenter
+** In un datastore diverso montato su un host ESXi diverso gestito dallo stesso vCenter
+** In un datastore diverso montato su un host ESXi diverso gestito da un vCenter diverso in modalità collegata
+
+
+
+
+
+NOTE: Non è possibile ripristinare le VM vVol su un host alternativo.
+
+
+NOTE: Il seguente flusso di lavoro di ripristino non è supportato: aggiungere una VM di archiviazione, quindi eseguire un backup di tale VM, quindi eliminare la VM di archiviazione e aggiungere un cluster che include la stessa VM di archiviazione, quindi tentare di ripristinare il backup originale.
+
+
+TIP: Per migliorare le prestazioni delle operazioni di ripristino negli ambienti NFS, abilitare l'API vStorage dell'applicazione VMware per l'integrazione di array (VAAI).
+
+.Prima di iniziare
+* Deve esistere un backup.
++
+Prima di poter ripristinare la VM, è necessario aver creato un backup della VM utilizzando il SnapCenter Plug-in for VMware vSphere .
+
++
+
+NOTE: Le operazioni di ripristino non possono essere completate correttamente se sono presenti snapshot della VM eseguiti da software diversi dal SnapCenter Plug-in for VMware vSphere.
+
+* Il datastore di destinazione deve essere pronto.
++
+** Il datastore di destinazione per l'operazione di ripristino deve disporre di spazio sufficiente per contenere una copia di tutti i file della VM (ad esempio: vmdk, vmx, vmsd).
+** Il datastore di destinazione non deve contenere file VM obsoleti a causa di precedenti errori nelle operazioni di ripristino.  I file obsoleti hanno il formato del nome `restore_xxx_xxxxxx_<filename>` .
+
+
+* La VM non deve essere in transito.
++
+La VM che si desidera ripristinare non deve essere in stato vMotion o Storage vMotion.
+
+* Errori di configurazione HA
++
+Prima di ripristinare i backup in una posizione diversa, assicurarsi che non siano visualizzati errori di configurazione HA nella schermata Riepilogo host vCenter ESXi.
+
+* Ripristino in posizioni diverse
++
+** Quando si esegue il ripristino in una posizione diversa, il SnapCenter Plug-in for VMware vSphere deve essere in esecuzione nel vCenter che rappresenta la destinazione dell'operazione di ripristino.  Il datastore di destinazione deve disporre di spazio sufficiente.
+** Il vCenter di destinazione nel campo Ripristina in posizione alternativa deve essere risolvibile tramite DNS.
+
+
+
+
+.Informazioni su questo compito
+* La VM è stata annullata e registrata di nuovo
++
+L'operazione di ripristino per le VM annulla la registrazione della VM originale, ripristina la VM da uno snapshot di backup e registra la VM ripristinata con lo stesso nome e configurazione sullo stesso server ESXi.  Dopo il ripristino, è necessario aggiungere manualmente le VM ai gruppi di risorse.
+
+* Ripristino dei datastore
++
+Non è possibile ripristinare un datastore, ma è possibile ripristinare qualsiasi VM al suo interno.
+
+* Ripristino delle VM vVol
++
+** Gli archivi dati vVol che si estendono su più VM non sono supportati.  Poiché i VMDK collegati in un datastore vVol che comprende più VM non vengono sottoposti a backup, le VM ripristinate conterranno solo VMDK parziali.
+** Non è possibile ripristinare un vVol su un host alternativo.
+** Il ribilanciamento automatico vVol non è supportato.
+
+
+* Errori di snapshot di coerenza VMware per una VM
++
+Anche se uno snapshot di coerenza VMware per una VM non riesce, la VM viene comunque sottoposta a backup.  È possibile visualizzare le entità contenute nella copia di backup nella procedura guidata di ripristino e utilizzarla per le operazioni di ripristino.
+
+* Un'operazione di ripristino potrebbe non riuscire se il livello di archiviazione del FabricPool in cui si trova la VM non è disponibile.
+
+
+.Passi
+. Nell'interfaccia utente grafica del client VMware vSphere, selezionare *Menu* nella barra degli strumenti, quindi selezionare *VM e modelli* dall'elenco a discesa.
++
+
+NOTE: Se si sta ripristinando una VM eliminata, le credenziali della VM di archiviazione aggiunte al SnapCenter Plug-in for VMware vSphere devono essere `vsadmin` o un account utente che ha tutti gli stessi privilegi di `vsadmin` .
+
+. Nel riquadro di navigazione a sinistra, fare clic con il pulsante destro del mouse su una VM, quindi selezionare * SnapCenter Plug-in for VMware vSphere* nell'elenco a discesa, quindi selezionare *Ripristina* nell'elenco a discesa secondario per avviare la procedura guidata.
+. Nella procedura guidata *Ripristina*, nella pagina *Seleziona backup*, seleziona lo snapshot di backup che desideri ripristinare.
++
+È possibile cercare un nome di backup specifico o un nome di backup parziale, oppure filtrare l'elenco dei backup selezionando l'icona del filtro e selezionando un intervallo di data e ora, selezionando se si desiderano backup contenenti snapshot VMware, se si desiderano backup montati e la posizione.  Selezionare *OK* per tornare alla procedura guidata.
+
+. Nella pagina *Seleziona ambito*, seleziona *Intera macchina virtuale* nel campo *Ambito di ripristino*, quindi seleziona la posizione di ripristino e immetti le informazioni sulla destinazione in cui montare il backup.
++
+Nel campo *Nome VM*, se esiste lo stesso nome VM, il nuovo formato del nome VM è `<vm_name>_<timestamp>` .
+
++
+Quando si ripristinano backup parziali, l'operazione di ripristino salta la pagina *Seleziona ambito*.
+
+. Nella pagina *Seleziona posizione*, seleziona la posizione per il datastore ripristinato.
++
+Nel SnapCenter Plug-in for VMware vSphere 4.5 e versioni successive, è possibile selezionare l'archiviazione secondaria per i volumi FlexGroup .
+
+. Rivedi la pagina Riepilogo e poi seleziona *Fine*.
+. Facoltativo: monitorare l'avanzamento dell'operazione selezionando *Attività recenti* nella parte inferiore dello schermo.
++
+Aggiorna lo schermo per visualizzare le informazioni aggiornate.
+
+
+
+.Dopo aver finito
+* Cambia indirizzo IP
++
+Se hai eseguito il ripristino in una posizione diversa, devi modificare l'indirizzo IP della VM appena creata per evitare un conflitto di indirizzi IP quando vengono configurati indirizzi IP statici.
+
+* Aggiungere VM ripristinate ai gruppi di risorse
++
+Sebbene le VM vengano ripristinate, non vengono aggiunte automaticamente ai rispettivi gruppi di risorse precedenti.  Pertanto, è necessario aggiungere manualmente le VM ripristinate ai gruppi di risorse appropriati.
+
+

@@ -1,0 +1,50 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_set_up_proxy_vms_for_restore_operations.html 
+keywords:  
+summary: 'Se si desidera utilizzare una VM proxy per collegare un disco virtuale per le operazioni di ripristino dei file guest, è necessario configurare la VM proxy prima di iniziare l"operazione di ripristino.  Sebbene sia possibile configurare una VM proxy in qualsiasi momento, potrebbe essere più comodo configurarla subito dopo il completamento della distribuzione del plug-in.' 
+---
+= Configurare le VM proxy per le operazioni di ripristino
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Se si desidera utilizzare una VM proxy per collegare un disco virtuale per le operazioni di ripristino dei file guest, è necessario configurare la VM proxy prima di iniziare l'operazione di ripristino.  Sebbene sia possibile configurare una VM proxy in qualsiasi momento, potrebbe essere più comodo configurarla subito dopo il completamento della distribuzione del plug-in.
+
+.Passi
+. Dalla finestra dei collegamenti del client vSphere, selezionare * SnapCenter Plug-in for VMware vSphere* in Plug-in.
+. Nella barra di navigazione a sinistra seleziona *Ripristino file ospite*.
+. Nella sezione *Esegui come credenziali*, effettuare una delle seguenti operazioni:
++
+|===
+| Per fare questo… | Fai questo… 
+
+
+| Utilizza le credenziali esistenti | Selezionare una qualsiasi delle credenziali configurate. 
+
+
+| Aggiungi nuove credenziali  a| 
+.. Selezionare *Aggiungi*.
+.. Nella finestra di dialogo *Esegui come credenziali*, immettere le credenziali.
+.. Selezionare *Seleziona VM*, quindi selezionare una VM nella finestra di dialogo *VM proxy*.  Selezionare *Salva* per tornare alla finestra di dialogo *Esegui come credenziali*.
+.. Inserisci le credenziali. Per Nome utente, devi inserire “Amministratore”.
+
+
+|===
++
+Il SnapCenter Plug-in for VMware vSphere utilizza le credenziali selezionate per accedere alla VM proxy selezionata.
+
++
+Le credenziali Esegui come devono essere quelle dell'amministratore di dominio predefinito fornito da Windows o dell'amministratore locale integrato.  Gli utenti del gruppo di lavoro possono utilizzare l'account amministratore locale integrato.
+
+. Nella sezione *Credenziali proxy*, seleziona *Aggiungi* per aggiungere una VM da utilizzare come proxy.
+. Nella finestra di dialogo *Proxy VM*, compilare le informazioni e quindi selezionare *Salva*.
+
+
+
+NOTE: È necessario eliminare la VM proxy dall'interfaccia utente SnapCenter Plug-in for VMware vSphere prima di poterla eliminare dall'host ESXi.

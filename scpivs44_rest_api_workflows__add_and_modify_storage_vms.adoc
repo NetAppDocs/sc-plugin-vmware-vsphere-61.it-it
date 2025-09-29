@@ -1,0 +1,39 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_rest_api_workflows__add_and_modify_storage_vms.html 
+keywords:  
+summary: Per eseguire operazioni di aggiunta e modifica di VM di storage utilizzando il SnapCenter Plug-in for VMware vSphere , è necessario seguire la sequenza prescritta di chiamate API REST. 
+---
+= Flussi di lavoro API REST per aggiungere e modificare VM di storage
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Per eseguire operazioni di aggiunta e modifica di VM di storage utilizzando il SnapCenter Plug-in for VMware vSphere , è necessario seguire la sequenza prescritta di chiamate API REST.
+
+Per ogni API REST, aggiungi `\https://<server>:<port>` nella parte anteriore dell'API REST per formare un endpoint completo.
+
+Per aggiungere operazioni di storage VM, seguire questo flusso di lavoro:
+
+|===
+| Fare un passo | API REST | Commenti 
+
+
+| 1 | `/4.1/storage-system` | `Add Storage System`aggiunge la VM di archiviazione specificata al SnapCenter Plug-in for VMware vSphere. 
+|===
+Per modificare le operazioni della VM di archiviazione, seguire questo flusso di lavoro:
+
+|===
+| Fare un passo | API REST | Commenti 
+
+
+| 1 | `/4.1/storage-system` | `getSvmAll`ottiene l'elenco di tutte le VM di archiviazione disponibili.  Prendi nota del *nome* della VM di archiviazione che vuoi modificare. 
+
+
+| 2 | `/4.1/storage-system` | `Modify Storage System`modifica la VM di archiviazione specificata.  Oltre a tutti gli altri attributi richiesti, passare il *nome* del passaggio 1. 
+|===

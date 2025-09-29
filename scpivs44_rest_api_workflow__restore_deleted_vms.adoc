@@ -1,0 +1,42 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_rest_api_workflow__restore_deleted_vms.html 
+keywords:  
+summary: Per eseguire operazioni di ripristino per i backup delle VM utilizzando il SnapCenter Plug-in for VMware vSphere , è necessario seguire la sequenza prescritta di chiamate alle API REST. 
+---
+= Flusso di lavoro API REST per ripristinare le VM eliminate
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Per eseguire operazioni di ripristino per i backup delle VM utilizzando il SnapCenter Plug-in for VMware vSphere , è necessario seguire la sequenza prescritta di chiamate alle API REST.
+
+Per ogni API REST, aggiungi `\https://<server>:<port>` nella parte anteriore dell'API REST per formare un endpoint completo.
+
+|===
+| Fare un passo | API REST | Commenti 
+
+
+| 1 | Vai a
+`\http://<vCenter-IP>/mob` | Trova l'UUID della VM nell'URL VMware Managed Objects.  Annotare l'*uuid* della VM che si desidera ripristinare. 
+
+
+| 2 | `/4.1/vm/{uuid}/backups` | `Get VM Backups`ottiene un elenco di backup per la VM specificata.  Passare l'*uuid* del passaggio 1.  Annotare il *backupId* del backup che si desidera ripristinare. 
+
+
+| 3 | `/4.1/vm/backups/{backupId}/
+snapshotlocations` | `Get snapshot locations`ottiene la posizione dello snapshot per il backup specificato.  Passare il *backupId* dal passaggio 2.  Notare le informazioni *snapshotLocationsList*. 
+
+
+| 4 | `/4.1/vm/{moref}/backups/
+availableesxhosts` | `Get available ESX Hosts`ottiene le informazioni sull'host su cui è archiviato il backup.  Notare le informazioni *availableEsxHostsList*. 
+
+
+| 5 | `/4.1/vm/{uuid}/backups/
+{backupId}/restore` | `Restore VM from a backup using uuid or restore a deleted VM`ripristina il backup specificato.  Passare l'*uuid* del passaggio 1.  Passare il *backupId* dal passaggio 2.  Passare le informazioni dei passaggi 3 e 4 nell'attributo *restoreLocations*.  Se il backup della VM è un backup parziale, impostare `restartVM` parametro su "false".  *Nota:* non è possibile ripristinare una VM che è un modello. 
+|===

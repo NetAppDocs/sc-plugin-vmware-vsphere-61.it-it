@@ -1,0 +1,42 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_detach_a_virtual_disk.html 
+keywords:  
+summary: Dopo aver collegato un disco virtuale per ripristinare singoli file, è possibile scollegare il disco virtuale dalla VM padre. 
+---
+= Scollegare un disco virtuale
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Dopo aver collegato un disco virtuale per ripristinare singoli file, è possibile scollegare il disco virtuale dalla VM padre.
+
+.Passi
+. Nell'interfaccia utente grafica del client VMware vSphere, selezionare *Menu* nella barra degli strumenti, quindi selezionare *VM e modelli* dall'elenco a discesa.
+. Nel riquadro di navigazione a sinistra, seleziona una VM.
+. Nel riquadro di navigazione a sinistra, fare clic con il pulsante destro del mouse sulla VM, quindi selezionare * SnapCenter Plug-in for VMware vSphere* nell'elenco a discesa, quindi selezionare *Scollega disco virtuale* nell'elenco a discesa secondario.
+. Nella schermata *Scollega disco virtuale*, seleziona uno o più dischi che desideri scollegare, quindi seleziona la casella di controllo *Scollega i dischi selezionati* e seleziona *SCOLLEGA*.
++
+
+IMPORTANT: Assicurati di selezionare il disco virtuale corretto.  La selezione del disco sbagliato potrebbe compromettere il lavoro di produzione.
+
+. Facoltativo: monitorare l'avanzamento dell'operazione nella sezione *Attività recenti*.
++
+Aggiorna lo schermo per visualizzare le informazioni aggiornate.
+
+. Verificare che il disco virtuale sia scollegato eseguendo quanto segue:
++
+.. Selezionare *Menu* nella barra degli strumenti, quindi selezionare *VM e modelli* dall'elenco a discesa.
+.. Nel riquadro di navigazione a sinistra, fare clic con il pulsante destro del mouse su una VM, quindi selezionare *Modifica impostazioni* nell'elenco a discesa.
+.. Nella finestra *Modifica impostazioni*, espandere l'elenco di ciascun disco rigido per visualizzare l'elenco dei file del disco.
++
+Nella pagina *Modifica impostazioni* sono elencati i dischi presenti sulla VM.  È possibile espandere i dettagli di ciascun disco rigido per visualizzare l'elenco dei dischi virtuali collegati.
+
+
+
+

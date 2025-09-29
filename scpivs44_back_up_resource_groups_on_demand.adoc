@@ -1,0 +1,38 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_back_up_resource_groups_on_demand.html 
+keywords:  
+summary: Le operazioni di backup vengono eseguite su tutte le risorse definite in un gruppo di risorse. Se a un gruppo di risorse è associato un criterio e configurata una pianificazione, i backup vengono eseguiti automaticamente in base alla pianificazione. 
+---
+= Eseguire il backup dei gruppi di risorse su richiesta
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Le operazioni di backup vengono eseguite su tutte le risorse definite in un gruppo di risorse. Se a un gruppo di risorse è associato un criterio e configurata una pianificazione, i backup vengono eseguiti automaticamente in base alla pianificazione.
+
+
+NOTE: Il backup ASA r2 crea snapshot del gruppo di coerenza e predispone il gruppo di coerenza primario se la risorsa specificata non ne è già dotata.
+
+.Prima di iniziare
+È necessario aver creato un gruppo di risorse con un criterio associato.
+
+
+IMPORTANT: Non avviare un processo di backup su richiesta quando è già in esecuzione un processo di backup del SnapCenter Plug-in for VMware vSphere MySQL.  Utilizzare la console di manutenzione per visualizzare la pianificazione dei backup configurata per il database MySQL.
+
+.Informazioni su questo compito
+Nelle versioni precedenti di Virtual Storage Console (VSC), era possibile eseguire un backup su richiesta senza dover configurare un processo di backup per una VM o un datastore.  Tuttavia, per il SnapCenter Plug-in for VMware vSphere, le VM e gli archivi dati devono trovarsi in un gruppo di risorse prima di poter eseguire i backup.
+
+.Passi
+. Nel riquadro di navigazione sinistro del plug-in SCV, seleziona *Gruppi di risorse*, quindi seleziona un gruppo di risorse e infine selezionaimage:scpivs44_image38.png["Icona di riproduzione"] *Esegui ora* per avviare il backup.
+. Se per il gruppo di risorse sono configurati più criteri, nella finestra di dialogo *Esegui backup ora* selezionare il criterio che si desidera utilizzare per questa operazione di backup.
+. Selezionare *OK* per avviare il backup.
+. Facoltativo: per maggiori dettagli, monitorare l'avanzamento dell'operazione selezionando *Attività recenti* nella parte inferiore della finestra o nel dashboard *Monitoraggio attività*.  .Risultato
+
+
+Se l'operazione di quiesce non riesce per una qualsiasi delle VM nel backup, il backup viene completato con un avviso e contrassegnato come non coerente con la VM, anche se il criterio selezionato ha selezionato la coerenza con la VM. In questo caso, è possibile che alcune VM siano state disattivate correttamente.  Nel monitor dei lavori, i dettagli della VM non riuscita mostreranno la quiescenza come non riuscita.

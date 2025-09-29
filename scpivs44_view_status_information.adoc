@@ -1,0 +1,75 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_view_status_information.html 
+keywords:  
+summary: 'È possibile visualizzare le informazioni sullo stato nella dashboard del client vSphere.  Le informazioni sullo stato vengono aggiornate una volta all"ora.' 
+---
+= Visualizza le informazioni sullo stato
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+È possibile visualizzare le informazioni sullo stato nella dashboard del client vSphere.  Le informazioni sullo stato vengono aggiornate una volta all'ora.
+
+.Passi
+. Dalla pagina di scelta rapida del client vCenter, selezionare SnapCenter Plug-in for VMware vSphere (SCV).
+. Nel riquadro di navigazione sinistro di SCV, seleziona *Dashboard* > *Stato*.
+. Visualizza le informazioni generali sullo stato oppure seleziona un collegamento per maggiori dettagli, come elencato nella tabella seguente.
++
+|===
+| Questa tessera del dashboard… | Visualizza le seguenti informazioni… 
+
+
+ a| 
+Attività lavorative recenti
+ a| 
+I tre-cinque processi di backup, ripristino e montaggio più recenti.
+
+** Seleziona un ID lavoro per visualizzare maggiori dettagli su quel lavoro.
+** Seleziona *Visualizza tutto* per andare alla scheda Monitoraggio lavori e ottenere maggiori dettagli su tutti i lavori.
+
+
+
+
+ a| 
+Lavori
+ a| 
+Conteggio di ogni tipo di processo (backup, ripristino e montaggio) eseguito nell'intervallo di tempo selezionato.  Passa il cursore su una sezione del grafico per visualizzare maggiori dettagli su quella categoria.
+
+
+
+ a| 
+Riepilogo della protezione più recente
+ a| 
+Riepiloghi dello stato di protezione dei dati delle VM primarie e secondarie o degli archivi dati nell'intervallo di tempo selezionato.
+
+** Selezionare il menu a discesa per selezionare *VM* o *Datastore*.
+** Per l'archiviazione secondaria, seleziona * SnapVault* o * SnapMirror*.
+** Passa il cursore su una sezione di un grafico per visualizzare il numero di VM o Datastore in quella categoria.  Nella categoria Riuscito, per ogni risorsa viene elencato il backup più recente.
+** È possibile modificare l'intervallo di tempo modificando il file di configurazione.  Il valore predefinito è 7 giorni. Per ulteriori informazioni, fare riferimento a link:scpivs44_customize_your_configuration.html["Personalizza la tua configurazione"] .
+** I contatori interni vengono aggiornati dopo ogni backup primario o secondario.  Il riquadro della dashboard viene aggiornato ogni sei ore.  Il tempo di aggiornamento non può essere modificato.  Nota: se si utilizza un criterio di protezione mirror-vault, i contatori per il riepilogo della protezione vengono visualizzati nel grafico di riepilogo SnapVault e non nel grafico SnapMirror .
+
+
+
+
+ a| 
+Configurazione
+ a| 
+Numero totale di ciascun tipo di oggetto gestito dal SnapCenter Plug-in for VMware vSphere.
+
+
+
+ a| 
+Magazzinaggio
+ a| 
+Numero totale di snapshot, snapshot SnapVault e SnapMirror , generati e quantità di spazio di archiviazione utilizzato per gli snapshot primari e secondari. Il grafico a linee traccia separatamente il consumo di storage primario e secondario su base giornaliera per un periodo mobile di 90 giorni.  Le informazioni sullo storage vengono aggiornate ogni 24 ore alle 01:08. Il risparmio di storage è il rapporto tra la capacità logica (risparmio di snapshot più storage consumato) e la capacità fisica dello storage primario.  Il grafico a barre illustra il risparmio di spazio di archiviazione.
+
+Passa il cursore su una linea del grafico per visualizzare i risultati dettagliati giorno per giorno.
+
+|===
+

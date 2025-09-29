@@ -1,0 +1,193 @@
+---
+sidebar: sidebar 
+permalink: scv48_audit_logs.html 
+keywords:  
+summary: 'Il registro di controllo consente di tracciare chi ha fatto cosa e quando.  Un registro di controllo è una raccolta di eventi in ordine cronologico e viene scritto in un file all"interno dell"appliance.' 
+---
+= Registri di controllo
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Un registro di controllo è una raccolta di eventi in ordine cronologico, che viene scritta in un file all'interno dell'appliance.  I file di registro di controllo vengono generati a `/var/log/netapp/audit` posizione e i nomi dei file seguono una delle convenzioni di denominazione seguenti:
+
+* audit.log: file di registro di controllo attivo in uso.
+* audit-%d{yyyy-MM-dd-HH-mm-ss}.log.gz: file di registro di controllo aggiornato.  La data e l'ora nel nome del file indicano quando è stato creato il file, ad esempio: audit-2022-12-15-16-28-01.log.gz.
+
+
+Nell'interfaccia utente del plug-in SCV, è possibile visualizzare ed esportare i dettagli del registro di controllo da *Dashboard* > *Impostazioni* > scheda *Registri di controllo*. È possibile visualizzare il controllo delle operazioni nei registri di controllo.  I registri di controllo vengono scaricati con il pacchetto di supporto.
+
+Se sono configurate le impostazioni e-mail, SCV invia una notifica e-mail in caso di errore nella verifica dell'integrità del registro di controllo.  Un errore di verifica dell'integrità del registro di controllo può verificarsi quando uno dei file viene manomesso o eliminato.
+
+Le configurazioni predefinite dei file di audit sono:
+
+* Il file di registro di controllo in uso può crescere fino a un massimo di 10 MB
+* Vengono conservati al massimo 10 file di registro di controllo
+
+
+L'integrità dei registri di controllo aggiornati viene verificata periodicamente.  SCV fornisce API REST per visualizzare i log e verificarne l'integrità.  Una pianificazione integrata attiva e assegna uno dei seguenti stati di integrità.
+
+|===
+
+
+| Stato | Descrizione 
+
+
+| MANOMESTRI | Il contenuto del file di registro di controllo è stato modificato 
+
+
+| NORMALE | Il file di registro di controllo non è modificato 
+
+
+| ROLLOVER ELIMINA | - Il file di registro di controllo viene eliminato in base alla conservazione - Per impostazione predefinita, vengono conservati solo 10 file 
+
+
+| ELIMINAZIONE INASPETTATA | Il file di registro di controllo è stato eliminato 
+
+
+| ATTIVO | - Il file di registro di controllo è in uso - Applicabile solo a audit.log 
+|===
+Gli eventi sono suddivisi in tre categorie principali:
+
+* Eventi sulla protezione dei dati
+* Eventi della console di manutenzione
+* Eventi della console di amministrazione
+
+
+
+
+== Eventi sulla protezione dei dati
+
+Le risorse in SCV sono:
+
+* Sistema di archiviazione
+* Gruppo di risorse
+* Politica
+* Backup
+* Sottoscrizione
+* Account
+
+
+Nella tabella seguente sono elencate le operazioni che possono essere eseguite su ciascuna risorsa:
+
+|===
+
+
+| *Risorse* | *Operazioni* 
+
+
+| Sistema di archiviazione | Creato, modificato, eliminato 
+
+
+| Sottoscrizione | Creato, modificato, eliminato 
+
+
+| Account | Creato, modificato, eliminato 
+
+
+| Gruppo di risorse | Creato, Modificato, Eliminato, Sospeso, Ripreso 
+
+
+| Politica | Creato, modificato, eliminato 
+
+
+| Backup | Creato, Rinominato, Eliminato, Montato, Smontato, Ripristinato VMDK, Ripristinata VM, Collega VMDK, Scollega VMDK, Ripristino file guest 
+|===
+
+
+== Eventi della console di manutenzione
+
+Le operazioni amministrative nella console di manutenzione vengono sottoposte a verifica.  Le opzioni disponibili per la console di manutenzione sono:
+
+. Servizi di avvio/arresto
+. Cambia nome utente e password
+. Cambia la password di MySQL
+. Configurare il backup di MySQL
+. Ripristina il backup di MySQL
+. Cambia la password dell'utente 'maint'
+. Cambia fuso orario
+. Cambia server NTP
+. Disabilitare l'accesso SSH
+. Aumentare la dimensione del disco di jail
+. Aggiornamento
+. Installa VMware Tools (stiamo lavorando per sostituirlo con Open-VM Tools)
+. Modifica le impostazioni dell'indirizzo IP
+. Modifica le impostazioni di ricerca del nome di dominio
+. Modificare i percorsi statici
+. Accesso alla shell diagnostica
+. Abilita l'accesso diagnostico remoto
+
+
+
+
+== Eventi della console di amministrazione
+
+Vengono controllate le seguenti operazioni nell'interfaccia utente della Console di amministrazione:
+
+* Impostazioni
++
+** Cambia le credenziali di amministratore
+** Cambia fuso orario
+** Cambia server NTP
+** Modificare le impostazioni dell'indirizzo IPv4/IPv6
+
+
+* Configurazione
++
+** Modifica le credenziali di vCenter
+** Abilita/Disabilita plug-in
+
+
+
+
+
+
+== Configurare i server syslog
+
+I registri di controllo vengono archiviati all'interno dell'appliance e periodicamente ne viene verificata l'integrità.  L'inoltro degli eventi consente di ottenere eventi dal computer di origine o di inoltro e di memorizzarli in un computer centralizzato, ovvero il server Syslog.  I dati vengono crittografati durante il transito tra la sorgente e la destinazione.
+
+.Prima di iniziare
+È necessario disporre dei privilegi di amministratore.
+
+.Informazioni su questo compito
+Questa attività ti aiuta a configurare il server syslog.
+
+.Passi
+. Accedi al SnapCenter Plug-in for VMware vSphere.
+. Nel riquadro di navigazione a sinistra, seleziona *Impostazioni* > *Registri di controllo* > *Impostazioni*.
+. Nel riquadro *Impostazioni registro di controllo*, seleziona *Invia registri di controllo al server Syslog*
+. Inserisci i seguenti dettagli:
++
+** IP del server Syslog
+** Porta del server Syslog
+** Formato RFC
+** Certificato del server Syslog
+
+
+. Selezionare *SALVA* per salvare le impostazioni del server Syslog.
+
+
+
+
+== Modifica le impostazioni del registro di controllo
+
+È possibile modificare le configurazioni predefinite delle impostazioni del registro.
+
+.Prima di iniziare
+È necessario disporre dei privilegi di amministratore.
+
+.Informazioni su questo compito
+Questa attività consente di modificare le impostazioni predefinite del registro di controllo.
+
+.Passi
+. Accedi al SnapCenter Plug-in for VMware vSphere.
+. Nel riquadro di navigazione a sinistra, seleziona *Impostazioni* > *Registri di controllo* > *Impostazioni*.
+. Nel riquadro *Impostazioni registro di controllo*, immettere il numero massimo di file di registro di controllo e il limite della dimensione del file di registro di controllo.
+. Selezionare l'opzione *Invia registri di controllo al server Syslog* se si sceglie di inviare i registri al server Syslog.  Inserisci i dettagli del server.
+. Salva le impostazioni.
+

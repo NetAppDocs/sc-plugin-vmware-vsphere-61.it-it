@@ -1,0 +1,33 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_protect_data_overview.html 
+keywords:  
+summary: Tutte le operazioni di backup vengono eseguite su gruppi di risorse, che possono contenere qualsiasi combinazione di una o più VM e datastore. È possibile eseguire il backup su richiesta o in base a un programma di protezione definito. 
+---
+= Flusso di lavoro sulla protezione dei dati
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Utilizzare il client SnapCenter vSphere per eseguire operazioni di protezione dei dati per VM, VMDK e datastore.  Tutte le operazioni di backup vengono eseguite su gruppi di risorse, che possono contenere qualsiasi combinazione di una o più VM e datastore. È possibile eseguire il backup su richiesta o in base a un programma di protezione definito.
+
+Quando si esegue il backup di un datastore, si esegue il backup di tutte le VM presenti in quel datastore.
+
+Le operazioni di backup e ripristino non possono essere eseguite contemporaneamente sullo stesso gruppo di risorse.
+
+Dovresti leggere le informazioni su cosa supporta e cosa non supporta il SnapCenter Plug-in for VMware vSphere .link:scpivs44_deployment_planning_and_requirements.html["Pianificazione e requisiti di distribuzione"]
+
+Nelle configurazioni MetroCluster :
+
+* Il SnapCenter Plug-in for VMware vSphere potrebbe non essere in grado di rilevare una relazione di protezione dopo un failover. Fare riferimento a https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapCenter/Unable_to_detect_SnapMirror_or_SnapVault_relationship_after_MetroCluster_failover["Articolo della Knowledge Base: Impossibile rilevare la relazione SnapMirror o SnapVault dopo il failover MetroCluster"^] per maggiori informazioni.
+* Se i backup falliscono con l'errore `Unable to discover resources on SCV: <xxx>…` per le VM NFS e VMFS dopo il passaggio/ritorno, riavviare i servizi SnapCenter VMware dalla console di manutenzione.
+
+
+La seguente figura del flusso di lavoro mostra la sequenza in cui è necessario eseguire le operazioni di backup:
+
+image:scpivs44_image13.png["Flusso di lavoro delle operazioni di backup"]
