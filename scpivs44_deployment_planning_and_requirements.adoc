@@ -152,9 +152,6 @@ I requisiti software minimi per il supporto dei protocolli NVMe su TCP e NVMe su
 
 
 | Spazio minimo sul disco rigido per il SnapCenter Plug-in for VMware vSphere, registri e database MySQL | 100 GB 
-
-
-| Dimensione heap massima del servizio vmcontrol nell'appliance | 8 GB 
 |===
 
 
