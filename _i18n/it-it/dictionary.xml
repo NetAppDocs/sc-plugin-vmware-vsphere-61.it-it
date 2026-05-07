@@ -307,7 +307,6 @@
   <block id="110328d238985c18e0a7947b09b1ff0f" category="summary">Il SnapCenter Plug-in for VMware vSphere utilizza la crittografia SSL per una comunicazione sicura con il browser client.  Sebbene ciò consenta la crittografia dei dati in rete, la creazione di un nuovo certificato autofirmato o l'utilizzo della propria infrastruttura di autorità di certificazione (CA) o di una CA di terze parti garantiscono che il certificato sia univoco per il proprio ambiente.</block>
   <block id="8fbcd736aac5b9c6baba8f4db349f50e" category="doc">Creare e importare certificati</block>
   <block id="9668b00eae1748d51afb7f725a15301a" category="inline-link">Articolo della Knowledge Base: Come creare e/o importare un certificato SSL nel SnapCenter Plug-in for VMware vSphere</block>
-  <block id="6886be2ac69a368a307204ccfa1e00d9" category="paragraph">Fare riferimento a<block ref="bf84a7958c466b4ea912f7e396459ac9" category="inline-link-rx"></block> per maggiori informazioni.</block>
   <block id="0a4a3719bc7519d1162060e0f0e08f8a" category="doc">Creare policy di backup</block>
   <block id="a70216f52adf1eb56f9c607820ec2859" category="paragraph">Seguire le istruzioni fornite di seguito per creare criteri di backup</block>
   <block id="bbe1604d17d5228e6cf954f520fbcea1" category="list-text">Nel riquadro di navigazione sinistro del plug-in SCV, seleziona *Criteri*, quindi seleziona *Nuova politica*.</block>
@@ -768,8 +767,6 @@
   <block id="dde8b54fa4a91beedb7b736869c08569" category="cell">24 GB</block>
   <block id="3cb874290f06f3c2d44ce2e858bb041f" category="cell">Spazio minimo sul disco rigido per il SnapCenter Plug-in for VMware vSphere, registri e database MySQL</block>
   <block id="dcfebc6fbca2c5316f55c914e6593d2d" category="cell">100 GB</block>
-  <block id="f8bce6aa95f5621d608c29e258b620d2" category="cell">Dimensione heap massima del servizio vmcontrol nell'appliance</block>
-  <block id="af5700014f646d2567efa6288d85ab2b" category="cell">8 GB</block>
   <block id="9a0980e2d2a75eb076f41f7a4d439162" category="section-title">Requisiti di connessione e porta</block>
   <block id="3672cca688eb0474cd3fee2add1a2067" category="cell">Tipo di porto</block>
   <block id="99ddf0e823c1be51589f68696f62cf56" category="cell">Porta preconfigurata</block>
@@ -2173,4 +2170,5 @@
   <block id="c257f5c852c12409e63afb17104f69c5" category="sidebar">API REST</block>
   <block id="a3d53cfe9124531cb5f9bbfefe704326" category="sidebar">Flussi di lavoro delle API REST per modificare le pianificazioni integrate</block>
   <block id="3da6944b1baaec4beb70694ac307fd1f" category="sidebar">Aggiorna a una nuova patch della stessa versione</block>
+  <block id="04bc8505634cea728bd42022dbbe2763" category="paragraph">Consultare <block ref="3cc65228ae073aa630520717edc687a9" category="inline-link-rx"></block> per ulteriori informazioni.</block>
 </blocks>
