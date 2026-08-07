@@ -18,12 +18,14 @@ summary: 'È possibile utilizzare prescrizioni e post-scrizioni personalizzate c
 
 
 
+[[supported-script-types]]
 == Tipi di script supportati
 
 Sono supportati gli script Perl e shell.  Gli script shell devono iniziare con `!/bin/bash` . (`!/bin/sh` non è supportato.)
 
 
 
+[[script-path-location]]
 == Posizione del percorso dello script
 
 I prescript e i postscript vengono eseguiti dal SnapCenter Plug-in for VMware vSphere.  Pertanto, gli script devono trovarsi nel SnapCenter Plug-in for VMware vSphere OVA, con autorizzazioni di esecuzione.
@@ -34,6 +36,7 @@ Il percorso dello script viene convalidato al momento dell'esecuzione dello scri
 
 
 
+[[where-to-specify-scripts]]
 == Dove specificare gli script
 
 Gli script sono specificati nei criteri di backup. Quando viene avviato un processo di backup, il criterio associa automaticamente lo script alle risorse sottoposte a backup.
@@ -42,6 +45,7 @@ Per specificare più script, premere *Invio* dopo ogni percorso di script per el
 
 
 
+[[when-scripts-are-executed]]
 == Quando vengono eseguiti gli script
 
 Gli script vengono eseguiti in base al valore impostato per BACKUP_PHASE.
@@ -68,6 +72,7 @@ Controllare quanto segue per verificare che i valori dello script siano popolati
 
 
 
+[[environment-variables-passed-to-scripts]]
 == Variabili di ambiente passate agli script
 
 È possibile utilizzare negli script le variabili di ambiente mostrate nella tabella seguente.
@@ -106,12 +111,14 @@ SUSPENDED`
 |===
 
 
+[[script-timeouts]]
 == Timeout degli script
 
 Il timeout per gli script di backup è di 15 minuti e non può essere modificato.
 
 
 
+[[example-perl-script-1]]
 == Esempio di script PERL n. 1
 
 Il seguente script PERL di esempio stampa le variabili ambientali quando viene eseguito un backup.
@@ -130,6 +137,7 @@ Il seguente script PERL di esempio stampa le variabili ambientali quando viene e
 
 
 
+[[example-perl-script-2]]
 == Esempio di script PERL n. 2
 
 L'esempio seguente stampa informazioni sul backup.
@@ -159,6 +167,7 @@ L'esempio seguente stampa informazioni sul backup.
 
 
 
+[[example-shell-script]]
 == Esempio di script shell
 
 

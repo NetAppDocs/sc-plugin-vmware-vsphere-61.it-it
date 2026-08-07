@@ -24,6 +24,7 @@ Se la cache del plug-in non viene cancellata, i lavori recenti non vengono visua
 
 
 
+[[steps-for-clearing-the-cache]]
 == Passaggi per svuotare la cache
 
 . Individuare il `vsphere-client-serenity` cartella, quindi individuare la `com.netapp.scv.client-<release-number>` cartella ed eliminarla.

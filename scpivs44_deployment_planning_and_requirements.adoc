@@ -18,6 +18,7 @@ Prima di iniziare a distribuire il SnapCenter Plug-in for VMware vSphere (SCV), 
 
 
 
+[[host-requirements]]
 == Requisiti dell'host
 
 Prima di iniziare la distribuzione del SnapCenter Plug-in for VMware vSphere (SCV), è necessario acquisire familiarità con i requisiti dell'host.
@@ -79,6 +80,7 @@ Ripristino di una VM completa quando uno o più VMDK si trovano su un datastore 
 
 
 
+[[license-requirements]]
 == Requisiti di licenza
 
 |===
@@ -98,6 +100,7 @@ Ripristino di una VM completa quando uno o più VMDK si trovano su un datastore 
 |===
 
 
+[[software-support]]
 == Supporto software
 
 |===
@@ -139,6 +142,7 @@ I requisiti software minimi per il supporto dei protocolli NVMe su TCP e NVMe su
 
 
 
+[[space-sizing-and-scaling-requirements]]
 == Requisiti di spazio, dimensionamento e scala
 
 |===
@@ -155,6 +159,7 @@ I requisiti software minimi per il supporto dei protocolli NVMe su TCP e NVMe su
 |===
 
 
+[[connection-and-port-requirements]]
 == Requisiti di connessione e porta
 
 |===
@@ -178,6 +183,7 @@ Nota: è supportata la porta personalizzata per l'aggiunta dell'host SCV a SnapC
 |===
 
 
+[[configurations-supported]]
 == Configurazioni supportate
 
 Ogni istanza del plug-in supporta un solo vCenter Server, che è in modalità collegata.  Tuttavia, più istanze di plug-in possono supportare lo stesso SnapCenter Server, come mostrato nella figura seguente.
@@ -186,6 +192,7 @@ image:scpivs44_image4.png["Rappresentazione grafica della configurazione support
 
 
 
+[[rbac-privileges-required]]
 == Privilegi RBAC richiesti
 
 L'account amministratore vCenter deve disporre dei privilegi vCenter richiesti, elencati nella tabella seguente.
@@ -213,6 +220,7 @@ Estensione
 |===
 
 
+[[autosupport]]
 == AutoSupport
 
 Il SnapCenter Plug-in for VMware vSphere fornisce un minimo di informazioni per monitorarne l'utilizzo, incluso l'URL del plug-in.  AutoSupport include una tabella dei plug-in installati, visualizzata dal visualizzatore AutoSupport .

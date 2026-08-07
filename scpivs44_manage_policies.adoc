@@ -18,6 +18,7 @@ summary: È possibile creare, modificare, visualizzare, scollegare ed eliminare 
 
 
 
+[[detach-policies]]
 == Distacca le politiche
 
 È possibile scollegare i criteri da un gruppo di risorse SnapCenter Plug-in for VMware vSphere quando non si desidera più che tali criteri governino la protezione dei dati per le risorse.  È necessario scollegare una policy prima di poterla rimuovere o prima di modificarne la frequenza di pianificazione.
@@ -36,6 +37,7 @@ Le linee guida per la separazione dei criteri dal SnapCenter Plug-in for VMware 
 
 
 
+[[modify-policies]]
 == Modificare le politiche
 
 È possibile modificare i criteri per un gruppo di risorse SnapCenter Plug-in for VMware vSphere .  È possibile modificare la frequenza, le opzioni di replica, le impostazioni di conservazione degli snapshot o le informazioni sugli script mentre un criterio è associato a un gruppo di risorse.
@@ -68,6 +70,7 @@ Le modifiche avranno effetto quando verrà eseguito il successivo backup pianifi
 
 
 
+[[delete-policies]]
 == Elimina le policy
 
 Se non hai più bisogno di un criterio di backup configurato per SnapCenter Plug-in for VMware vSphere, potresti volerlo eliminare.

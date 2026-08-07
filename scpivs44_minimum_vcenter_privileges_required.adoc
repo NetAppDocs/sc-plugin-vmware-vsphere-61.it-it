@@ -18,12 +18,14 @@ Prima di iniziare la distribuzione del SnapCenter Plug-in for VMware vSphere, è
 
 
 
+[[required-privileges-for-vcenter-admin-role]]
 == Privilegi richiesti per il ruolo di amministratore di vCenter
 
 Datastore.AllocateSpace Datastore.Browse Datastore.Delete Datastore.FileManagement Datastore.Move Datastore.Rename Extension.Register Extension.Unregister Extension.Update Host.Config.AdvancedConfig Host.Config.Resources Host.Config.Settings Host.Config.Storage Host.Local.CreateVM Host.Local.DeleteVM Host.Local.ReconfigVM Network.Assign Resource.ApplyRecommendation Resource.AssignVMToPool Resource.ColdMigrate Resource.HotMigrate Resource.QueryVMotion System.Anonymous System.Read System.View Task.Create Task.Update VirtualMachine.Config.AddExistingDisk VirtualMachine.Config.AddNewDisk VirtualMachine.Config.AdvancedConfig VirtualMachine.Config.ReloadFromPath VirtualMachine.Config.RemoveDisk VirtualMachine.Config.Resource VirtualMachine.GuestOperations.Execute VirtualMachine.GuestOperations.Modify VirtualMachine.GuestOperations.Query VirtualMachine.Interact.PowerOff VirtualMachine.Interact.PowerOn VirtualMachine.Inventory.Create VirtualMachine.Inventory.CreateFromExisting VirtualMachine.Inventory.Delete VirtualMachine.Inventory.Move VirtualMachine.Inventory.Register VirtualMachine.Inventory.Unregister VirtualMachine.State.CreateSnapshot VirtualMachine.State.RemoveSnapshot VirtualMachine.State.RevertToSnapshot
 
 
 
+[[required-privileges-specific-to-snapcenter-plug-in-for-vmware-vcenter]]
 == Privilegi richiesti specifici per il plug-in SnapCenter per VMware vCenter
 
 |===

@@ -20,6 +20,7 @@ IL `scbr.override` Il file di configurazione viene utilizzato dal SnapCenter Plu
 
 
 
+[[create-the-scbr-override-configuration-file]]
 == Creare il file di configurazione scbr.override
 
 . Vai a `/opt/netapp/scvservice/standalone_aegis/etc/scbr/scbr.override-template` .
@@ -28,6 +29,7 @@ IL `scbr.override` Il file di configurazione viene utilizzato dal SnapCenter Plu
 
 
 
+[[properties-you-can-override]]
 == Proprietà che puoi sovrascrivere
 
 * Per impostazione predefinita, il modello utilizza il simbolo cancelletto per commentare le proprietà di configurazione.  Per utilizzare una proprietà per modificare un valore di configurazione, è necessario rimuovere `#` caratteri.

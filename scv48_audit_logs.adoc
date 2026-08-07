@@ -61,6 +61,7 @@ Gli eventi sono suddivisi in tre categorie principali:
 
 
 
+[[data-protection-events]]
 == Eventi sulla protezione dei dati
 
 Le risorse in SCV sono:
@@ -100,6 +101,7 @@ Nella tabella seguente sono elencate le operazioni che possono essere eseguite s
 |===
 
 
+[[maintenance-console-events]]
 == Eventi della console di manutenzione
 
 Le operazioni amministrative nella console di manutenzione vengono sottoposte a verifica.  Le opzioni disponibili per la console di manutenzione sono:
@@ -125,6 +127,7 @@ Le operazioni amministrative nella console di manutenzione vengono sottoposte a 
 
 
 
+[[admin-console-events]]
 == Eventi della console di amministrazione
 
 Vengono controllate le seguenti operazioni nell'interfaccia utente della Console di amministrazione:
@@ -147,6 +150,7 @@ Vengono controllate le seguenti operazioni nell'interfaccia utente della Console
 
 
 
+[[configure-syslog-servers]]
 == Configurare i server syslog
 
 I registri di controllo vengono archiviati all'interno dell'appliance e periodicamente ne viene verificata l'integrità.  L'inoltro degli eventi consente di ottenere eventi dal computer di origine o di inoltro e di memorizzarli in un computer centralizzato, ovvero il server Syslog.  I dati vengono crittografati durante il transito tra la sorgente e la destinazione.
@@ -174,6 +178,7 @@ Questa attività ti aiuta a configurare il server syslog.
 
 
 
+[[change-audit-log-settings]]
 == Modifica le impostazioni del registro di controllo
 
 È possibile modificare le configurazioni predefinite delle impostazioni del registro.
